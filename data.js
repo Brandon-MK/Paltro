@@ -70,10 +70,54 @@ const data = [
       },
       {
         type: 'Text',
-        text: 'Hello World! Today i shall be at the Newyork studio.',
+        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce viverra nunc neque, ut eleifend tortor faucibus id. Vivamus at ligula quis lectus hendrerit porta. Aenean ac nunc eu arcu egestas tincidunt. Vestibulum non rutrum libero. Aenean a laoreet ante. Suspendisse non ornare justo, eu lobortis ante. Cras sagittis sem nec est molestie fermentum. Curabitur at eros eu urna pulvinar facilisis sed sit amet felis. Pellentesque sit amet risus odio.',
         timestamp: new Date('October 17, 2013 03:24:00'),
         key: '3',
         comments: [],
+      },
+      {
+        type: 'Text',
+        text: 'Consequat laboris nulla deserunt non amet ad quis ea. Nostrud anim non cupidatat eu commodo fugiat commodo enim est ipsum. Esse anim enim fugiat sunt aute duis ea mollit aliquip do. Et officia excepteur eu reprehenderit consequat enim excepteur nostrud excepteur amet eu cillum Lorem sit.',
+        timestamp: new Date('October 07, 2015 03:24:00'),
+        key: '4',
+        comments: [
+          {
+            id: '1',
+            username: 'johnbangre',
+            name: 'John Bangre',
+            profileImage:
+              'https://images.unsplash.com/photo-1611485988300-b7530defb8e2?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bWFuJTIwZmFjZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+            comment: 'Wow!🍫, You deserve a treat for that.',
+            timestamp: new Date('July 06, 2021 05:00:00'),
+          },
+          {
+            id: '2',
+            username: 'that__guy',
+            name: 'Daniel Rue',
+            profileImage:
+              'https://images.unsplash.com/photo-1591258739299-5b65d5cbb235?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bWFuJTIwZmFjZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+            comment: 'Nice image',
+            timestamp: new Date('July 06, 2021 06:04:00'),
+          },
+          {
+            id: '3',
+            username: 'home',
+            name: 'Sean Mckay',
+            profileImage:
+              'https://images.unsplash.com/photo-1605462863863-10d9e47e15ee?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8bWFuJTIwZmFjZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+            comment: 'True saying',
+            timestamp: new Date('July 06, 2021 07:20:00'),
+          },
+          {
+            id: '4',
+            username: 'done',
+            name: 'Neil Glover',
+            profileImage:
+              'https://images.unsplash.com/photo-1610560454932-5209addcf8cc?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjN8fG1hbiUyMGZhY2V8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+            comment: 'Lovely',
+            timestamp: new Date('July 06, 2021 07:59:00'),
+          },
+        ],
       },
     ],
   },

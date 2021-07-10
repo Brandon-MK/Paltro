@@ -19,7 +19,7 @@ const ImageCard = props => {
 
   const onZoomStateChanged = event => {
     if (event.nativeEvent.oldState === GestureHandler.State.ACTIVE) {
-      Animted.spring(zoom, {
+      Animated.spring(zoom, {
         toValue: 1,
         useNativeDriver: true,
         bounciness: 1,

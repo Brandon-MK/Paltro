@@ -5,22 +5,9 @@ import ImageCard from './ImageCard';
 import TextCard from './TextCard';
 
 const SocialCard = () => {
-  const onViewed = dat => {
-    const datamemory = [];
-    dat[0].item.map(item => {
-      if (!datamemory.includes(item.key)) {
-        datamemory.push([dat[0].item, ...datamemory]);
-        console.log(datamemory);
-      }
-    });
-  };
   return (
     <FlatList
       data={data}
-      viewabilityConfig={{
-        itemVisiblePercentThreshold: 50,
-      }}
-      onViewableItemsChanged={onViewed}
       renderItem={({item}) => {
         return item.posts.map(vals => {
           if (vals.type === 'Image') {
@@ -46,6 +33,7 @@ const SocialCard = () => {
                   Timestamp={vals.timestamp}
                   ProfileImage={item.profileImage}
                   Text={vals.text}
+                  Comments={vals.comments}
                 />
               </View>
             );

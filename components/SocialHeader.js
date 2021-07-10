@@ -17,6 +17,7 @@ const SocialHeader = () => {
         justifyContent: 'space-between',
         borderBottomRightRadius: 5,
         borderBottomLeftRadius: 5,
+        backgroundColor: 'white',
       }}>
       <View
         style={{
