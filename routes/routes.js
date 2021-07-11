@@ -14,6 +14,7 @@ import DiscoverSocial from '../screens/social/discoverSocial';
 import NotiSocial from '../screens/social/notiSocial';
 import SearchSocial from '../screens/social/searchSocial';
 import ChatSocial from '../screens/social/chatSocial';
+import MessageScreen from '../screens/social/message.social.js';
 import HomeFood from '../screens/food/homefood';
 import CartFood from '../screens/food/cartfood';
 import DealsFood from '../screens/food/dealsfood';
@@ -271,6 +272,7 @@ function MainStack() {
         <Stack.Screen name="HomeShop" component={ShopBottomTabs} />
         <Stack.Screen name="HomeMusic" component={MusicBottomTabs} />
         <Stack.Screen name="DiscoverSocial" component={DiscoverSocial} />
+        <Stack.Screen name="MessageSocial" component={MessageScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

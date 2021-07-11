@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, FlatList} from 'react-native';
 import {Input} from 'native-base';
 import ChatView from '../../components/ChatView';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const ChatSocial = () => {
   const data = [
@@ -46,11 +47,27 @@ const ChatSocial = () => {
     <View>
       <View style={{padding: 10}}>
         <Text style={{fontSize: 20, marginVertical: 10}}>Messages</Text>
-        <Input placeholder={'Search...'} variant={'filled'} />
+        <Input
+          placeholder={'Search'}
+          variant={'filled'}
+          InputLeftElement={
+            <Ionicons name="search" size={20} style={{marginLeft: 10}} />
+          }
+        />
       </View>
       <View>
         <FlatList
           data={data}
+          ItemSeparatorComponent={() => (
+            <View
+              style={{
+                width: '95%',
+                borderColor: '#e5e5e5',
+                borderBottomWidth: 1,
+                alignSelf: 'center',
+              }}
+            />
+          )}
           renderItem={({item}) => (
             <ChatView
               profileImage={item.profileImage}
