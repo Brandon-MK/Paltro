@@ -4,10 +4,12 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import BottomSheet from './bottomSheet';
 import Choices from './choices';
 import {useNavigation} from '@react-navigation/native';
+import {ThemeContext} from '../theme/themeManger';
 
 const SocialHeader = () => {
   const refRBSheet = useRef();
   const navigation = useNavigation();
+  const {styles} = React.useContext(ThemeContext);
   return (
     <View
       style={{
@@ -17,7 +19,7 @@ const SocialHeader = () => {
         justifyContent: 'space-between',
         borderBottomRightRadius: 5,
         borderBottomLeftRadius: 5,
-        backgroundColor: 'white',
+        backgroundColor: styles.cardBackground,
       }}>
       <View
         style={{
@@ -37,7 +39,7 @@ const SocialHeader = () => {
           />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('SearchSocial')}>
-          <Ionicons name="search-outline" size={30} />
+          <Ionicons name="search-outline" size={30} color={styles.IconColor} />
         </TouchableOpacity>
       </View>
 
@@ -45,7 +47,7 @@ const SocialHeader = () => {
         style={{
           flexDirection: 'row',
           alignItems: 'center',
-          backgroundColor: '#e3e3e3',
+          backgroundColor: styles.profileCard,
           padding: 8,
           borderRadius: 50,
           width: '42%',
@@ -63,13 +65,18 @@ const SocialHeader = () => {
               width: 35,
               height: 35,
               borderRadius: 50,
-
-              borderColor: 'white',
+              borderColor: styles.borderColor,
               borderWidth: 2,
             }}
           />
         </View>
-        <Text style={{fontFamily: 'Roboto-Medium'}}>Mick John</Text>
+        <Text
+          style={{
+            fontFamily: 'Roboto-Medium',
+            color: styles.textColor,
+          }}>
+          Mick John
+        </Text>
       </TouchableOpacity>
 
       <BottomSheet

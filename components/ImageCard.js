@@ -8,11 +8,12 @@ import GestureHandler, {
 } from 'react-native-gesture-handler';
 import BottomSheet from './bottomSheet';
 import {ScrollView} from 'react-native';
+import {ThemeContext} from '../theme/themeManger';
 
 const ImageCard = props => {
   const zoom = useRef(new Animated.Value(1)).current;
   const refRBSheet = useRef();
-
+  const {styles} = React.useContext(ThemeContext);
   const onZoom = Animated.event([{nativeEvent: {scale: zoom}}], {
     useNativeDriver: true,
   });
@@ -53,7 +54,7 @@ const ImageCard = props => {
       <Text
         style={{
           fontSize: 10,
-          color: 'grey',
+          color: styles.timeStampColor,
         }}>{`${strTime} • ${time.getDate()} ${
         Months[time.getMonth()]
       } ${time.getFullYear()}`}</Text>
@@ -121,7 +122,7 @@ const ImageCard = props => {
         borderRadius: 10,
         elevation: 2,
         alignSelf: 'center',
-        backgroundColor: 'white',
+        backgroundColor: styles.cardBackground,
         marginVertical: 10,
       }}>
       <View
@@ -149,8 +150,12 @@ const ImageCard = props => {
             />
           </PinchGestureHandler>
           <View style={{marginLeft: 10}}>
-            <Text style={{fontSize: 15}}>{props.Name}</Text>
-            <Text style={{fontSize: 13}}>@{props.Username}</Text>
+            <Text style={{fontSize: 15, color: styles.textColor}}>
+              {props.Name}
+            </Text>
+            <Text style={{fontSize: 13, color: styles.textColor}}>
+              @{props.Username}
+            </Text>
           </View>
         </View>
         <View>
@@ -181,13 +186,14 @@ const ImageCard = props => {
             justifyContent: 'space-between',
           }}>
           <View>
-            <Ionicons name="heart-outline" size={32} color={'black'} />
+            <Ionicons name="heart-outline" size={32} color={styles.IconColor} />
           </View>
           <View>
             <Ionicons
               name="ios-chatbox-outline"
               size={30}
               onPress={() => refRBSheet.current.open()}
+              color={styles.IconColor}
             />
           </View>
         </View>
@@ -230,14 +236,18 @@ const ImageCard = props => {
           <Text
             style={{
               fontSize: 12,
-              color: 'black',
+              color: styles.textColor,
             }}>{`95 likes • ${props.Comments.length} comments`}</Text>
         </View>
         <View
           style={{marginHorizontal: 10, marginBottom: 5, marginVertical: 2}}>
-          <Text>{props.Text}</Text>
+          <Text style={{color: styles.textColor}}>{props.Text}</Text>
         </View>
-        <View style={{paddingHorizontal: 10, paddingBottom: 5}}>
+        <View
+          style={{
+            paddingHorizontal: 10,
+            paddingBottom: 5,
+          }}>
           {TimeStamp(props.Timestamp)}
         </View>
       </View>

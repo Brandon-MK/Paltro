@@ -3,6 +3,7 @@ import {Keyboard, TouchableOpacity, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {ThemeProvider, ThemeContext} from '../theme/themeManger';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
@@ -24,6 +25,7 @@ import WishShop from '../screens/shop/wishshop';
 import HomeMusic from '../screens/music/homemusic';
 import LikeMusic from '../screens/music/likemusic';
 import Podcasts from '../screens/music/podcasts';
+import FoodView from '../screens/food/foodView';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -46,23 +48,23 @@ const horizontalAnimation = {
   },
 };
 
-const bottomStyle = {
-  backgroundColor: 'white',
-  position: 'absolute',
-  bottom: 10,
-  marginHorizontal: 20,
-  height: 60,
-  borderRadius: 10,
-  elevation: 3,
-};
-
-const bottomOptions = {
-  showLabel: false,
-  keyboardHidesTabBar: true,
-  style: bottomStyle,
-};
-
 const SocialBottomTabs = () => {
+  const {styles} = React.useContext(ThemeContext);
+  const bottomStyle = {
+    backgroundColor: styles.cardBackground,
+    position: 'absolute',
+    bottom: 10,
+    marginHorizontal: 20,
+    height: 50,
+    borderRadius: 10,
+    elevation: 3,
+    borderTopWidth: 0,
+  };
+  const bottomOptions = {
+    showLabel: false,
+    keyboardHidesTabBar: true,
+    style: bottomStyle,
+  };
   return (
     <Tab.Navigator tabBarOptions={bottomOptions}>
       <Tab.Screen
@@ -73,7 +75,15 @@ const SocialBottomTabs = () => {
             <AntDesign
               name="home"
               size={30}
-              color={focused ? 'black' : 'grey'}
+              color={
+                styles.cardBackground === '#222222'
+                  ? focused
+                    ? 'white'
+                    : 'grey'
+                  : focused
+                  ? 'black'
+                  : 'grey'
+              }
             />
           ),
         }}
@@ -86,7 +96,15 @@ const SocialBottomTabs = () => {
             <Ionicons
               name="compass-outline"
               size={30}
-              color={focused ? 'black' : 'grey'}
+              color={
+                styles.cardBackground === '#222222'
+                  ? focused
+                    ? 'white'
+                    : 'grey'
+                  : focused
+                  ? 'black'
+                  : 'grey'
+              }
             />
           ),
         }}
@@ -99,7 +117,15 @@ const SocialBottomTabs = () => {
             <Ionicons
               name="notifications-outline"
               size={30}
-              color={focused ? 'black' : 'grey'}
+              color={
+                styles.cardBackground === '#222222'
+                  ? focused
+                    ? 'white'
+                    : 'grey'
+                  : focused
+                  ? 'black'
+                  : 'grey'
+              }
             />
           ),
         }}
@@ -112,7 +138,15 @@ const SocialBottomTabs = () => {
             <Ionicons
               name="chatbubble-outline"
               size={30}
-              color={focused ? 'black' : 'grey'}
+              color={
+                styles.cardBackground === '#222222'
+                  ? focused
+                    ? 'white'
+                    : 'grey'
+                  : focused
+                  ? 'black'
+                  : 'grey'
+              }
             />
           ),
         }}
@@ -122,6 +156,22 @@ const SocialBottomTabs = () => {
 };
 
 const FoodBottomTabs = () => {
+  const {styles} = React.useContext(ThemeContext);
+  const bottomStyle = {
+    backgroundColor: styles.cardBackground,
+    position: 'absolute',
+    bottom: 10,
+    marginHorizontal: 20,
+    height: 50,
+    borderRadius: 10,
+    elevation: 3,
+    borderTopWidth: 0,
+  };
+  const bottomOptions = {
+    showLabel: false,
+    keyboardHidesTabBar: true,
+    style: bottomStyle,
+  };
   return (
     <Tab.Navigator tabBarOptions={bottomOptions}>
       <Tab.Screen
@@ -132,7 +182,15 @@ const FoodBottomTabs = () => {
             <AntDesign
               name="home"
               size={30}
-              color={focused ? 'black' : 'grey'}
+              color={
+                styles.cardBackground === '#222222'
+                  ? focused
+                    ? 'white'
+                    : 'grey'
+                  : focused
+                  ? 'black'
+                  : 'grey'
+              }
             />
           ),
         }}
@@ -145,7 +203,15 @@ const FoodBottomTabs = () => {
             <Ionicons
               name="cart-outline"
               size={30}
-              color={focused ? 'black' : 'grey'}
+              color={
+                styles.cardBackground === '#222222'
+                  ? focused
+                    ? 'white'
+                    : 'grey'
+                  : focused
+                  ? 'black'
+                  : 'grey'
+              }
             />
           ),
         }}
@@ -158,7 +224,15 @@ const FoodBottomTabs = () => {
             <Feather
               name="percent"
               size={30}
-              color={focused ? 'black' : 'grey'}
+              color={
+                styles.cardBackground === '#222222'
+                  ? focused
+                    ? 'white'
+                    : 'grey'
+                  : focused
+                  ? 'black'
+                  : 'grey'
+              }
             />
           ),
         }}
@@ -168,6 +242,22 @@ const FoodBottomTabs = () => {
 };
 
 const ShopBottomTabs = () => {
+  const {styles} = React.useContext(ThemeContext);
+  const bottomStyle = {
+    backgroundColor: styles.cardBackground,
+    position: 'absolute',
+    bottom: 10,
+    marginHorizontal: 20,
+    height: 50,
+    borderRadius: 10,
+    elevation: 3,
+    borderTopWidth: 0,
+  };
+  const bottomOptions = {
+    showLabel: false,
+    keyboardHidesTabBar: true,
+    style: bottomStyle,
+  };
   return (
     <Tab.Navigator tabBarOptions={bottomOptions}>
       <Tab.Screen
@@ -178,7 +268,15 @@ const ShopBottomTabs = () => {
             <AntDesign
               name="home"
               size={30}
-              color={focused ? 'black' : 'grey'}
+              color={
+                styles.cardBackground === '#222222'
+                  ? focused
+                    ? 'white'
+                    : 'grey'
+                  : focused
+                  ? 'black'
+                  : 'grey'
+              }
             />
           ),
         }}
@@ -191,7 +289,15 @@ const ShopBottomTabs = () => {
             <Feather
               name="heart"
               size={30}
-              color={focused ? 'black' : 'grey'}
+              color={
+                styles.cardBackground === '#222222'
+                  ? focused
+                    ? 'white'
+                    : 'grey'
+                  : focused
+                  ? 'black'
+                  : 'grey'
+              }
             />
           ),
         }}
@@ -204,7 +310,15 @@ const ShopBottomTabs = () => {
             <Ionicons
               name="cart-outline"
               size={30}
-              color={focused ? 'black' : 'grey'}
+              color={
+                styles.cardBackground === '#222222'
+                  ? focused
+                    ? 'white'
+                    : 'grey'
+                  : focused
+                  ? 'black'
+                  : 'grey'
+              }
             />
           ),
         }}
@@ -214,6 +328,22 @@ const ShopBottomTabs = () => {
 };
 
 const MusicBottomTabs = () => {
+  const {styles} = React.useContext(ThemeContext);
+  const bottomStyle = {
+    backgroundColor: styles.cardBackground,
+    position: 'absolute',
+    bottom: 10,
+    marginHorizontal: 20,
+    height: 50,
+    borderRadius: 10,
+    elevation: 3,
+    borderTopWidth: 0,
+  };
+  const bottomOptions = {
+    showLabel: false,
+    keyboardHidesTabBar: true,
+    style: bottomStyle,
+  };
   return (
     <Tab.Navigator tabBarOptions={bottomOptions}>
       <Tab.Screen
@@ -224,7 +354,15 @@ const MusicBottomTabs = () => {
             <AntDesign
               name="home"
               size={30}
-              color={focused ? 'black' : 'grey'}
+              color={
+                styles.cardBackground === '#222222'
+                  ? focused
+                    ? 'white'
+                    : 'grey'
+                  : focused
+                  ? 'black'
+                  : 'grey'
+              }
             />
           ),
         }}
@@ -237,7 +375,15 @@ const MusicBottomTabs = () => {
             <Feather
               name="heart"
               size={30}
-              color={focused ? 'black' : 'grey'}
+              color={
+                styles.cardBackground === '#222222'
+                  ? focused
+                    ? 'white'
+                    : 'grey'
+                  : focused
+                  ? 'black'
+                  : 'grey'
+              }
             />
           ),
         }}
@@ -250,7 +396,15 @@ const MusicBottomTabs = () => {
             <Ionicons
               name="mic-outline"
               size={30}
-              color={focused ? 'black' : 'grey'}
+              color={
+                styles.cardBackground === '#222222'
+                  ? focused
+                    ? 'white'
+                    : 'grey'
+                  : focused
+                  ? 'black'
+                  : 'grey'
+              }
             />
           ),
         }}
@@ -273,9 +427,14 @@ function MainStack() {
         <Stack.Screen name="HomeMusic" component={MusicBottomTabs} />
         <Stack.Screen name="DiscoverSocial" component={DiscoverSocial} />
         <Stack.Screen name="MessageSocial" component={MessageScreen} />
+        <Stack.Screen name="FoodView" component={FoodView} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
-export default MainStack;
+export default () => (
+  <ThemeProvider>
+    <MainStack />
+  </ThemeProvider>
+);

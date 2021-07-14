@@ -45,14 +45,27 @@ const FoodHeader = () => {
           />
           <Text style={{fontSize: 15}}>800 Cheese Avenue</Text>
         </TouchableOpacity>
-        <View>
-          <Ionicons
-            name="search-outline"
-            size={35}
-            color={'black'}
-            style={{marginLeft: 10, marginRight: -5}}
-          />
-        </View>
+      </View>
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        <Input
+          placeholder={'Search for food'}
+          variant={'filled'}
+          underlineColorAndroid={'transparent'}
+          style={{paddingLeft: 0}}
+          InputLeftElement={
+            <Ionicons
+              name="search-outline"
+              size={25}
+              color={'black'}
+              style={{padding: 5}}
+            />
+          }
+        />
       </View>
 
       <BottomSheet

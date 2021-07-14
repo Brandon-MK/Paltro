@@ -1,7 +1,9 @@
 import React from 'react';
 import {View, Image, FlatList, Text} from 'react-native';
+import {ThemeContext} from '../theme/themeManger';
 
 const SocialStory = () => {
+  const {styles} = React.useContext(ThemeContext);
   const data = [
     {
       id: '1',
@@ -55,7 +57,7 @@ const SocialStory = () => {
           />
         </View>
 
-        <Text style={{fontSize: 12}}>{item.name}</Text>
+        <Text style={{fontSize: 12, color: styles.textColor}}>{item.name}</Text>
       </View>
     );
   };

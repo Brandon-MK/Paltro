@@ -5,8 +5,10 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import BottomSheet from './bottomSheet';
 import {Input} from 'native-base';
+import {ThemeContext} from '../theme/themeManger';
 
 const TextCard = props => {
+  const {styles} = React.useContext(ThemeContext);
   const TimeStamp = time => {
     const Months = {
       0: 'Jan',
@@ -116,7 +118,7 @@ const TextCard = props => {
           borderRadius: 10,
           elevation: 2,
           alignSelf: 'center',
-          backgroundColor: 'white',
+          backgroundColor: styles.cardBackground,
           marginVertical: 10,
         },
         props.customStyles,
@@ -137,8 +139,12 @@ const TextCard = props => {
             style={{width: 40, height: 40, borderRadius: 50}}
           />
           <View style={{marginLeft: 10}}>
-            <Text style={{fontSize: 15}}>{props.Name}</Text>
-            <Text style={{fontSize: 13}}>@{props.Username}</Text>
+            <Text style={{fontSize: 15, color: styles.textColor}}>
+              {props.Name}
+            </Text>
+            <Text style={{fontSize: 13, color: styles.textColor}}>
+              @{props.Username}
+            </Text>
           </View>
         </View>
         <View>
@@ -149,6 +155,7 @@ const TextCard = props => {
         <View style={{paddingHorizontal: 10, paddingBottom: 5}}>
           <Text
             onTextLayout={onTextLayout}
+            style={{color: styles.textColor}}
             numberOfLines={textShown ? undefined : 4}>
             {props.Text}
           </Text>
@@ -158,7 +165,7 @@ const TextCard = props => {
               style={{
                 lineHeight: 21,
                 // marginTop: 5,
-                color: 'grey',
+                color: styles.textColor,
                 fontSize: 10,
               }}>
               {textShown ? 'Read less...' : 'Read more...'}
@@ -166,7 +173,7 @@ const TextCard = props => {
           ) : null}
         </View>
         <View style={{paddingHorizontal: 10}}>
-          <Text style={{fontSize: 10, color: 'grey'}}>
+          <Text style={{fontSize: 10, color: styles.timeStampColor}}>
             {TimeStamp(props.Timestamp)}
           </Text>
         </View>
@@ -188,12 +195,13 @@ const TextCard = props => {
             justifyContent: 'space-between',
           }}>
           <View>
-            <Ionicons name="heart-outline" size={32} color={'black'} />
+            <Ionicons name="heart-outline" size={32} color={styles.IconColor} />
           </View>
           <View>
             <Ionicons
               name="ios-chatbox-outline"
               size={29}
+              color={styles.IconColor}
               onPress={() => refRBSheet.current.open()}
             />
           </View>
@@ -202,7 +210,7 @@ const TextCard = props => {
           <Text
             style={{
               fontSize: 12,
-              color: 'black',
+              color: styles.textColor,
             }}>{`95 likes • ${props.Comments.length} comments`}</Text>
         </View>
       </View>
