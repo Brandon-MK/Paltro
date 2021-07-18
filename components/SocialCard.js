@@ -3,11 +3,13 @@ import {FlatList, View} from 'react-native';
 import data from '../data';
 import ImageCard from './ImageCard';
 import TextCard from './TextCard';
+import SocialStory from './SocialStory';
 
 const SocialCard = () => {
   return (
     <FlatList
       data={data}
+      ListHeaderComponent={<SocialStory />}
       renderItem={({item}) => {
         return item.posts.map(vals => {
           if (vals.type === 'Image') {

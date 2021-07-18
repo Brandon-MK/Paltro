@@ -6757,6 +6757,11 @@ react-native-gesture-handler@^1.10.3:
     invariant "^2.2.4"
     prop-types "^15.7.2"
 
+react-native-image-colors@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-image-colors/-/react-native-image-colors-1.3.0.tgz#3e499730618540fddb779b3f73defe81d2d91801"
+  integrity sha512-1k+4wXWqm+sFA3H01Xri9HQ4UCWi0dvuUID4rrnzu6VlR/Oa525Scot0li36IOTOl0x/Ar883bh0bcfHOhi+vg==
+
 react-native-image-picker@^4.0.4:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-4.0.4.tgz#4b09d644d9ad7afaedc82db650522dca6bbefc5c"
@@ -6823,6 +6828,11 @@ react-native-tab-view@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-3.0.1.tgz#7ed8c5c4a0bb48fa8895e612d26e6d545ed03447"
   integrity sha512-L7qXtYz5Z+NdWyu38zaJrlHA/8H6rNFRZXe3ydym12UEEPPoefbVZ71b9YK2O6QP0u4pUlzMpMVM/Lsz2DJ4jg==
+
+react-native-track-player@^1.2.7:
+  version "1.2.7"
+  resolved "https://registry.yarnpkg.com/react-native-track-player/-/react-native-track-player-1.2.7.tgz#a721662fc32383cf2979a48b33db091140e88962"
+  integrity sha512-U1kA25qm398/kY6BvTojGHt4S1tYuKrJNQpXW+dA+p0B+n4LlPyoidUXfu951YM7aoisg8EmQPsevUFmcXG+cg==
 
 react-native-vector-icons@^8.1.0:
   version "8.1.0"

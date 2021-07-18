@@ -347,16 +347,8 @@ const SearchSocial = () => {
         <View
           style={{
             paddingVertical: 5,
-            flexDirection: 'row',
-            alignItems: 'center',
+            left: 10,
           }}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Ionicons
-              name="chevron-back-outline"
-              style={{marginHorizontal: 5}}
-              size={28}
-            />
-          </TouchableOpacity>
           <Text style={{fontSize: 20}}>Search</Text>
         </View>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -364,7 +356,7 @@ const SearchSocial = () => {
             <Input
               variant={'filled'}
               height={50}
-              placeholder={'Looking for someone...'}
+              placeholder={'Looking for something'}
               InputLeftElement={
                 <Ionicons
                   name="search-outline"

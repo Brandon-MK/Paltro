@@ -5,11 +5,13 @@ import BottomSheet from './bottomSheet';
 import Choices from './choices';
 import {useNavigation} from '@react-navigation/native';
 import {ThemeContext} from '../theme/themeManger';
+import LoadingImage from './loadingImage';
 
 const SocialHeader = () => {
   const refRBSheet = useRef();
   const navigation = useNavigation();
   const {styles} = React.useContext(ThemeContext);
+  const [Loading, setLoading] = React.useState(true);
   return (
     <View
       style={{
@@ -38,9 +40,6 @@ const SocialHeader = () => {
             }}
           />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('SearchSocial')}>
-          <Ionicons name="search-outline" size={30} color={styles.IconColor} />
-        </TouchableOpacity>
       </View>
 
       <TouchableOpacity
@@ -56,19 +55,23 @@ const SocialHeader = () => {
         onPress={() => {
           navigation.navigate('ProfileSocial');
         }}>
-        <View style={{elevation: 5, marginRight: 5, borderRadius: 50}}>
-          <Image
-            source={{
-              uri: 'https://images.unsplash.com/photo-1563122870-6b0b48a0af09?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=334&q=80',
-            }}
-            style={{
-              width: 35,
-              height: 35,
-              borderRadius: 50,
-              borderColor: styles.borderColor,
-              borderWidth: 2,
-            }}
-          />
+        <View>
+          <View style={{elevation: 5, marginRight: 5, borderRadius: 50}}>
+            <Image
+              source={{
+                uri: 'https://images.unsplash.com/photo-1563122870-6b0b48a0af09?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=334&q=80',
+              }}
+              style={{
+                width: 35,
+                height: 35,
+                borderRadius: 50,
+                borderColor: styles.borderColor,
+                borderWidth: 2,
+              }}
+              onLoadEnd={() => setLoading(false)}
+            />
+          </View>
+          {Loading ? <LoadingImage type={'Image'} /> : null}
         </View>
         <Text
           style={{

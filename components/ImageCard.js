@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import {View, Text, Animated, Image} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -9,24 +9,14 @@ import GestureHandler, {
 import BottomSheet from './bottomSheet';
 import {ScrollView} from 'react-native';
 import {ThemeContext} from '../theme/themeManger';
+import LoadingImage from './loadingImage';
 
 const ImageCard = props => {
-  const zoom = useRef(new Animated.Value(1)).current;
   const refRBSheet = useRef();
   const {styles} = React.useContext(ThemeContext);
-  const onZoom = Animated.event([{nativeEvent: {scale: zoom}}], {
-    useNativeDriver: true,
-  });
+  const [loading, setLoading] = useState(true);
+  const [imageLoading, setImageLoading] = useState(true);
 
-  const onZoomStateChanged = event => {
-    if (event.nativeEvent.oldState === GestureHandler.State.ACTIVE) {
-      Animated.spring(zoom, {
-        toValue: 1,
-        useNativeDriver: true,
-        bounciness: 1,
-      }).start();
-    }
-  };
   const TimeStamp = time => {
     const Months = {
       0: 'Jan',
@@ -108,8 +98,15 @@ const ImageCard = props => {
       });
     } else if (props.Comments.length === 0) {
       return (
-        <View>
-          <Text>No comments...</Text>
+        <View
+          style={{
+            marginTop: 40,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <Text style={{fontSize: 20, color: 'grey'}}>
+            Be the first to comment
+          </Text>
         </View>
       );
     }
@@ -134,21 +131,20 @@ const ImageCard = props => {
           marginTop: 5,
         }}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <PinchGestureHandler
-            onGestureEvent={onZoom}
-            onHandlerStateChange={onZoomStateChanged}>
-            <Animated.Image
+          <View>
+            <Image
               source={{
                 uri: props.ProfileImage,
               }}
+              onLoadEnd={() => setLoading(false)}
               style={{
                 width: 40,
                 height: 40,
                 borderRadius: 50,
-                transform: [{scale: zoom}],
               }}
             />
-          </PinchGestureHandler>
+            {loading ? <LoadingImage type={'user'} /> : null}
+          </View>
           <View style={{marginLeft: 10}}>
             <Text style={{fontSize: 15, color: styles.textColor}}>
               {props.Name}
@@ -163,12 +159,16 @@ const ImageCard = props => {
         </View>
       </View>
       <View style={{height: 200, marginVertical: 15}}>
-        <Image
-          source={{
-            uri: props.Source,
-          }}
-          style={{height: '100%', width: '100%'}}
-        />
+        <View>
+          <Image
+            source={{
+              uri: props.Source,
+            }}
+            onLoadEnd={() => setImageLoading(false)}
+            style={{height: '100%', width: '100%'}}
+          />
+          {imageLoading ? <LoadingImage type="image" /> : null}
+        </View>
       </View>
       <View
         style={{

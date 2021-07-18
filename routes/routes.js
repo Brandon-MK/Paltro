@@ -22,10 +22,14 @@ import DealsFood from '../screens/food/dealsfood';
 import HomeShop from '../screens/shop/homeshop';
 import CartShop from '../screens/shop/cartshop';
 import WishShop from '../screens/shop/wishshop';
-import HomeMusic from '../screens/music/homemusic';
-import LikeMusic from '../screens/music/likemusic';
-import Podcasts from '../screens/music/podcasts';
 import FoodView from '../screens/food/foodView';
+import CategoryView from '../screens/shop/categoryView';
+import ItemViewShop from '../screens/shop/ItemViewShop';
+import HomePodcast from '../screens/podcast/homePodcast';
+import SearchPodcast from '../screens/podcast/searchPodcast';
+import ProfilePodcast from '../screens/podcast/profilePodcast';
+import PodcastPlayer from '../screens/podcast/podcastPlayer';
+import StoryView from '../screens/social/StoryView';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -89,12 +93,12 @@ const SocialBottomTabs = () => {
         }}
       />
       <Tab.Screen
-        name="DiscoverSocial"
-        component={DiscoverSocial}
+        name="SearchSocial"
+        component={SearchSocial}
         options={{
           tabBarIcon: ({focused}) => (
             <Ionicons
-              name="compass-outline"
+              name="search-outline"
               size={30}
               color={
                 styles.cardBackground === '#222222'
@@ -327,7 +331,7 @@ const ShopBottomTabs = () => {
   );
 };
 
-const MusicBottomTabs = () => {
+const PodcastBottomTabs = () => {
   const {styles} = React.useContext(ThemeContext);
   const bottomStyle = {
     backgroundColor: styles.cardBackground,
@@ -347,33 +351,12 @@ const MusicBottomTabs = () => {
   return (
     <Tab.Navigator tabBarOptions={bottomOptions}>
       <Tab.Screen
-        name="HomeMusic"
-        component={HomeMusic}
-        options={{
-          tabBarIcon: ({focused}) => (
-            <AntDesign
-              name="home"
-              size={30}
-              color={
-                styles.cardBackground === '#222222'
-                  ? focused
-                    ? 'white'
-                    : 'grey'
-                  : focused
-                  ? 'black'
-                  : 'grey'
-              }
-            />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="LikeMusic"
-        component={LikeMusic}
+        name="HomePodcast"
+        component={HomePodcast}
         options={{
           tabBarIcon: ({focused}) => (
             <Feather
-              name="heart"
+              name="mic"
               size={30}
               color={
                 styles.cardBackground === '#222222'
@@ -389,12 +372,33 @@ const MusicBottomTabs = () => {
         }}
       />
       <Tab.Screen
-        name="Podcasts"
-        component={Podcasts}
+        name="SearchPodcast"
+        component={SearchPodcast}
         options={{
           tabBarIcon: ({focused}) => (
-            <Ionicons
-              name="mic-outline"
+            <Feather
+              name="search"
+              size={30}
+              color={
+                styles.cardBackground === '#222222'
+                  ? focused
+                    ? 'white'
+                    : 'grey'
+                  : focused
+                  ? 'black'
+                  : 'grey'
+              }
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="ProfilePodcast"
+        component={ProfilePodcast}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <Feather
+              name="user"
               size={30}
               color={
                 styles.cardBackground === '#222222'
@@ -416,18 +420,22 @@ const MusicBottomTabs = () => {
 function MainStack() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={horizontalAnimation} headerMode={false}>
+      <Stack.Navigator headerMode={false}>
         <Stack.Screen name="login" component={login} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="HomeSocial" component={SocialBottomTabs} />
         <Stack.Screen name="ProfileSocial" component={ProfileSocial} />
         <Stack.Screen name="SearchSocial" component={SearchSocial} />
+        <Stack.Screen name="SocialStory" component={StoryView} />
         <Stack.Screen name="HomeFood" component={FoodBottomTabs} />
         <Stack.Screen name="HomeShop" component={ShopBottomTabs} />
-        <Stack.Screen name="HomeMusic" component={MusicBottomTabs} />
+        <Stack.Screen name="HomePodcast" component={PodcastBottomTabs} />
         <Stack.Screen name="DiscoverSocial" component={DiscoverSocial} />
         <Stack.Screen name="MessageSocial" component={MessageScreen} />
         <Stack.Screen name="FoodView" component={FoodView} />
+        <Stack.Screen name="CategoryView" component={CategoryView} />
+        <Stack.Screen name="ItemViewShop" component={ItemViewShop} />
+        <Stack.Screen name="PodcastPlayer" component={PodcastPlayer} />
       </Stack.Navigator>
     </NavigationContainer>
   );

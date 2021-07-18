@@ -6,9 +6,11 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import BottomSheet from './bottomSheet';
 import {Input} from 'native-base';
 import {ThemeContext} from '../theme/themeManger';
+import LoadingImage from './loadingImage';
 
 const TextCard = props => {
   const {styles} = React.useContext(ThemeContext);
+  const [loading, setLoading] = useState(true);
   const TimeStamp = time => {
     const Months = {
       0: 'Jan',
@@ -103,8 +105,15 @@ const TextCard = props => {
       });
     } else if (props.Comments.length === 0) {
       return (
-        <View>
-          <Text>No comments...</Text>
+        <View
+          style={{
+            marginTop: 40,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <Text style={{fontSize: 20, color: 'grey'}}>
+            Be the first to comment
+          </Text>
         </View>
       );
     }
@@ -132,12 +141,17 @@ const TextCard = props => {
           marginTop: 5,
         }}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <Image
-            source={{
-              uri: props.ProfileImage,
-            }}
-            style={{width: 40, height: 40, borderRadius: 50}}
-          />
+          <View>
+            <Image
+              source={{
+                uri: props.ProfileImage,
+              }}
+              onLoadEnd={() => setLoading(false)}
+              style={{width: 40, height: 40, borderRadius: 50}}
+            />
+            {loading ? <LoadingImage type={'user'} /> : null}
+          </View>
+
           <View style={{marginLeft: 10}}>
             <Text style={{fontSize: 15, color: styles.textColor}}>
               {props.Name}

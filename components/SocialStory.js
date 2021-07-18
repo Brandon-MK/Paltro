@@ -1,9 +1,13 @@
 import React from 'react';
-import {View, Image, FlatList, Text} from 'react-native';
+import {View, Image, FlatList, Text, Pressable} from 'react-native';
 import {ThemeContext} from '../theme/themeManger';
+import {useNavigation} from '@react-navigation/native';
+import LoadingImage from './loadingImage';
 
 const SocialStory = () => {
   const {styles} = React.useContext(ThemeContext);
+  const [Loading, setLoading] = React.useState(true);
+  const navigation = useNavigation();
   const data = [
     {
       id: '1',
@@ -26,8 +30,20 @@ const SocialStory = () => {
     {
       id: '4',
       profileImage:
-        'https://images.unsplash.com/photo-1589317621382-0cbef7ffcc4c?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8YmxhY2slMjB3b21hbnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+        'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fHBlcnNvbnxlbnwwfDF8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
       name: 'Melissa',
+    },
+    {
+      id: '5',
+      profileImage:
+        'https://images.unsplash.com/photo-1607017137021-5dc7e8cd4317?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjR8fHBlcnNvbnxlbnwwfDF8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+      name: 'Henry',
+    },
+    {
+      id: '6',
+      profileImage:
+        'https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjF8fHBlcnNvbnxlbnwwfDF8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+      name: 'Tevin',
     },
   ];
   const stories = ({item}) => {
@@ -39,30 +55,34 @@ const SocialStory = () => {
           justifyContent: 'center',
           marginHorizontal: 8,
         }}>
-        <View
-          style={{
-            borderRadius: 50,
-            borderColor: '#20a8fc',
-            borderWidth: 2,
-            borderStyle: 'dashed',
-          }}>
-          <Image
-            source={{uri: item.profileImage}}
+        <Pressable onPress={() => navigation.navigate('SocialStory')}>
+          <View
             style={{
-              width: 50,
-              height: 50,
               borderRadius: 50,
-              margin: 1,
-            }}
-          />
-        </View>
-
+              borderColor: '#20a8fc',
+              borderWidth: 2,
+              borderStyle: 'dashed',
+            }}>
+            <View>
+              <Image
+                source={{uri: item.profileImage}}
+                style={{
+                  width: 50,
+                  height: 50,
+                  borderRadius: 50,
+                  margin: 1,
+                }}
+              />
+              {Loading ? <LoadingImage type={'user'} /> : null}
+            </View>
+          </View>
+        </Pressable>
         <Text style={{fontSize: 12, color: styles.textColor}}>{item.name}</Text>
       </View>
     );
   };
   return (
-    <View style={{marginHorizontal: 10, marginVertical: 10, width: '100%'}}>
+    <View style={{marginTop: 10, width: '100%'}}>
       <FlatList
         data={data}
         renderItem={stories}

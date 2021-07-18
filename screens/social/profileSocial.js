@@ -91,6 +91,7 @@ const ProfileSocial = () => {
       profileImage: profileImage,
       text: 'Hello World!',
       timestamp: new Date('July 06, 2021 03:24:00'),
+      comments: [],
     },
     {
       id: '2',
@@ -99,6 +100,7 @@ const ProfileSocial = () => {
       profileImage: profileImage,
       text: 'Cat got your tounge.',
       timestamp: new Date('July 06, 2021 03:24:00'),
+      comments: [],
     },
     {
       id: '3',
@@ -107,6 +109,7 @@ const ProfileSocial = () => {
       profileImage: profileImage,
       text: "What's a niche?",
       timestamp: new Date('July 06, 2021 03:24:00'),
+      comments: [],
     },
     {
       id: '4',
@@ -115,6 +118,7 @@ const ProfileSocial = () => {
       profileImage: profileImage,
       text: 'Dab fired quicky!',
       timestamp: new Date('July 06, 2021 03:24:00'),
+      comments: [],
     },
   ];
   const [Tab, setTab] = useState(0);
@@ -130,6 +134,7 @@ const ProfileSocial = () => {
                 Username={item.username}
                 Timestamp={item.timestamp}
                 ProfileImage={item.profileImage}
+                Comments={item.comments}
                 Text={item.text}
                 customStyles={{
                   width: '95%',
@@ -190,7 +195,7 @@ const ProfileSocial = () => {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between',
-            padding: 5,
+            padding: 10,
             paddingHorizontal: 10,
             backgroundColor: 'white',
             elevation: 2,

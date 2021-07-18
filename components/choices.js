@@ -55,9 +55,9 @@ const Choices = props => {
           },
         ]}
         onPress={() => {
-          navigation.navigate('HomeMusic');
+          navigation.navigate('HomePodcast');
         }}>
-        <Text style={{fontSize: 20, marginHorizontal: 10}}>Music</Text>
+        <Text style={{fontSize: 20, marginHorizontal: 10}}>Podcasts</Text>
       </TouchableOpacity>
     </View>
   );

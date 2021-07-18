@@ -1,11 +1,13 @@
 import React, {useRef} from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {useNavigation} from '@react-navigation/native';
 import BottomSheet from './bottomSheet';
 import {Input} from 'native-base';
 import Choices from './choices';
 
 const MusicHeader = () => {
+  const navigation = useNavigation();
   const refRBSheet = useRef();
   return (
     <View
@@ -34,10 +36,12 @@ const MusicHeader = () => {
           </TouchableOpacity>
         </View>
         <View style={{marginTop: 10}}>
-          <Text style={{fontSize: 25, fontFamily: 'Roboto-Bold'}}>
+          <Text
+            style={{fontSize: 25, fontFamily: 'Roboto-Bold', color: 'white'}}>
             Hello Mike
           </Text>
-          <Text style={{fontSize: 15, fontFamily: 'Roboto-Light'}}>
+          <Text
+            style={{fontSize: 15, fontFamily: 'Roboto-Light', color: 'white'}}>
             Listen to what fits you.
           </Text>
         </View>
@@ -46,8 +50,9 @@ const MusicHeader = () => {
         <Ionicons
           name="search-outline"
           size={35}
-          color={'black'}
+          color={'white'}
           style={{marginLeft: 10, marginRight: -5}}
+          onPress={() => navigation.navigate('SearchMusic')}
         />
       </View>
 
