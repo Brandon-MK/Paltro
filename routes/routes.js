@@ -1,5 +1,4 @@
 import React from 'react';
-import {Keyboard, TouchableOpacity, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -16,13 +15,9 @@ import NotiSocial from '../screens/social/notiSocial';
 import SearchSocial from '../screens/social/searchSocial';
 import ChatSocial from '../screens/social/chatSocial';
 import MessageScreen from '../screens/social/message.social.js';
-import HomeFood from '../screens/food/homefood';
-import CartFood from '../screens/food/cartfood';
-import DealsFood from '../screens/food/dealsfood';
 import HomeShop from '../screens/shop/homeshop';
 import CartShop from '../screens/shop/cartshop';
 import WishShop from '../screens/shop/wishshop';
-import FoodView from '../screens/food/foodView';
 import CategoryView from '../screens/shop/categoryView';
 import ItemViewShop from '../screens/shop/ItemViewShop';
 import HomePodcast from '../screens/podcast/homePodcast';
@@ -30,6 +25,11 @@ import SearchPodcast from '../screens/podcast/searchPodcast';
 import ProfilePodcast from '../screens/podcast/profilePodcast';
 import PodcastPlayer from '../screens/podcast/podcastPlayer';
 import StoryView from '../screens/social/StoryView';
+import LoadingScreen from '../components/LoadingScreen';
+import Notification from '../components/notification';
+import Camera from '../screens/social/Camera';
+import EditImage from '../screens/social/EditImage';
+import JetScreen from '../screens/social/jet';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -56,12 +56,6 @@ const SocialBottomTabs = () => {
   const {styles} = React.useContext(ThemeContext);
   const bottomStyle = {
     backgroundColor: styles.cardBackground,
-    position: 'absolute',
-    bottom: 10,
-    marginHorizontal: 20,
-    height: 50,
-    borderRadius: 10,
-    elevation: 3,
     borderTopWidth: 0,
   };
   const bottomOptions = {
@@ -159,102 +153,10 @@ const SocialBottomTabs = () => {
   );
 };
 
-const FoodBottomTabs = () => {
-  const {styles} = React.useContext(ThemeContext);
-  const bottomStyle = {
-    backgroundColor: styles.cardBackground,
-    position: 'absolute',
-    bottom: 10,
-    marginHorizontal: 20,
-    height: 50,
-    borderRadius: 10,
-    elevation: 3,
-    borderTopWidth: 0,
-  };
-  const bottomOptions = {
-    showLabel: false,
-    keyboardHidesTabBar: true,
-    style: bottomStyle,
-  };
-  return (
-    <Tab.Navigator tabBarOptions={bottomOptions}>
-      <Tab.Screen
-        name="HomeFood"
-        component={HomeFood}
-        options={{
-          tabBarIcon: ({focused}) => (
-            <AntDesign
-              name="home"
-              size={30}
-              color={
-                styles.cardBackground === '#222222'
-                  ? focused
-                    ? 'white'
-                    : 'grey'
-                  : focused
-                  ? 'black'
-                  : 'grey'
-              }
-            />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="cartFood"
-        component={CartFood}
-        options={{
-          tabBarIcon: ({focused}) => (
-            <Ionicons
-              name="cart-outline"
-              size={30}
-              color={
-                styles.cardBackground === '#222222'
-                  ? focused
-                    ? 'white'
-                    : 'grey'
-                  : focused
-                  ? 'black'
-                  : 'grey'
-              }
-            />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="DealsFood"
-        component={DealsFood}
-        options={{
-          tabBarIcon: ({focused}) => (
-            <Feather
-              name="percent"
-              size={30}
-              color={
-                styles.cardBackground === '#222222'
-                  ? focused
-                    ? 'white'
-                    : 'grey'
-                  : focused
-                  ? 'black'
-                  : 'grey'
-              }
-            />
-          ),
-        }}
-      />
-    </Tab.Navigator>
-  );
-};
-
 const ShopBottomTabs = () => {
   const {styles} = React.useContext(ThemeContext);
   const bottomStyle = {
     backgroundColor: styles.cardBackground,
-    position: 'absolute',
-    bottom: 10,
-    marginHorizontal: 20,
-    height: 50,
-    borderRadius: 10,
-    elevation: 3,
     borderTopWidth: 0,
   };
   const bottomOptions = {
@@ -335,12 +237,6 @@ const PodcastBottomTabs = () => {
   const {styles} = React.useContext(ThemeContext);
   const bottomStyle = {
     backgroundColor: styles.cardBackground,
-    position: 'absolute',
-    bottom: 10,
-    marginHorizontal: 20,
-    height: 50,
-    borderRadius: 10,
-    elevation: 3,
     borderTopWidth: 0,
   };
   const bottomOptions = {
@@ -420,22 +316,25 @@ const PodcastBottomTabs = () => {
 function MainStack() {
   return (
     <NavigationContainer>
-      <Stack.Navigator headerMode={false}>
+      <Stack.Navigator headerMode={false} initialRouteName={'HomeSocial'}>
         <Stack.Screen name="login" component={login} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="HomeSocial" component={SocialBottomTabs} />
         <Stack.Screen name="ProfileSocial" component={ProfileSocial} />
         <Stack.Screen name="SearchSocial" component={SearchSocial} />
         <Stack.Screen name="SocialStory" component={StoryView} />
-        <Stack.Screen name="HomeFood" component={FoodBottomTabs} />
         <Stack.Screen name="HomeShop" component={ShopBottomTabs} />
         <Stack.Screen name="HomePodcast" component={PodcastBottomTabs} />
         <Stack.Screen name="DiscoverSocial" component={DiscoverSocial} />
         <Stack.Screen name="MessageSocial" component={MessageScreen} />
-        <Stack.Screen name="FoodView" component={FoodView} />
         <Stack.Screen name="CategoryView" component={CategoryView} />
         <Stack.Screen name="ItemViewShop" component={ItemViewShop} />
         <Stack.Screen name="PodcastPlayer" component={PodcastPlayer} />
+        <Stack.Screen name="LoadingScreen" component={LoadingScreen} />
+        <Stack.Screen name="Notification" component={Notification} />
+        <Stack.Screen name="Camera" component={Camera} />
+        <Stack.Screen name="EditImage" component={EditImage} />
+        <Stack.Screen name="JetScreen" component={JetScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

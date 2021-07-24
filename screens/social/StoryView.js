@@ -45,18 +45,11 @@ const stories = [
   },
 ];
 
-export default class StoryView extends React.Component {
-  state = {
-    ready: false,
-  };
-
-  render() {
-    const {ready} = this.state;
-    return (
-      <View style={{flex: 1}}>
-        <StatusBar barStyle="light-content" />
-        <Stories2 {...{stories}} />
-      </View>
-    );
-  }
-}
+const StoryView = () => {
+  return (
+    <View style={{flex: 1}}>
+      <Stories2 {...{stories}} />
+    </View>
+  );
+};
+export default StoryView;

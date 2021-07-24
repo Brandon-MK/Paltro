@@ -6,12 +6,24 @@ import Choices from './choices';
 import {useNavigation} from '@react-navigation/native';
 import {ThemeContext} from '../theme/themeManger';
 import LoadingImage from './loadingImage';
+import axios from 'axios';
 
 const SocialHeader = () => {
   const refRBSheet = useRef();
   const navigation = useNavigation();
-  const {styles} = React.useContext(ThemeContext);
+  const {styles, UserId} = React.useContext(ThemeContext);
   const [Loading, setLoading] = React.useState(true);
+  const [data, setdata] = React.useState([]);
+
+  //const UserRetrieve = () => {
+  //   axios
+  //     .get(`http://192.168.0.101:5000/paltroServer/v1/accountFeed/${UserId}`)
+  //     .then(data => setdata(data.data))
+  //     .catch(err => console.log(err));
+  // };
+  // React.useEffect(() => {
+  //   UserRetrieve();
+  // }, []);
   return (
     <View
       style={{
@@ -19,15 +31,16 @@ const SocialHeader = () => {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        borderBottomRightRadius: 5,
-        borderBottomLeftRadius: 5,
+        borderBottomRightRadius: 6,
+        borderBottomLeftRadius: 6,
         backgroundColor: styles.cardBackground,
+        elevation: 5,
       }}>
       <View
         style={{
           flexDirection: 'row',
           alignItems: 'center',
-          width: '30%',
+
           justifyContent: 'space-between',
         }}>
         <TouchableOpacity onPress={() => refRBSheet.current.open()}>
@@ -40,16 +53,24 @@ const SocialHeader = () => {
             }}
           />
         </TouchableOpacity>
+        <Text
+          style={{
+            fontSize: 15,
+            marginLeft: 10,
+            fontFamily: 'Roboto-Medium',
+            color: styles.textColor,
+          }}>
+          Mick John🉐🇺🇬
+        </Text>
       </View>
 
       <TouchableOpacity
         style={{
           flexDirection: 'row',
           alignItems: 'center',
-          backgroundColor: styles.profileCard,
-          padding: 8,
+
           borderRadius: 50,
-          width: '42%',
+          minWidth: '10%',
           justifyContent: 'center',
         }}
         onPress={() => {
@@ -58,12 +79,14 @@ const SocialHeader = () => {
         <View>
           <View style={{elevation: 5, marginRight: 5, borderRadius: 50}}>
             <Image
-              source={{
-                uri: 'https://images.unsplash.com/photo-1563122870-6b0b48a0af09?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=334&q=80',
-              }}
+              source={
+                data.profileImage == undefined || data.profileImage === ''
+                  ? require('../images/user.png')
+                  : {uri: data.profileImage}
+              }
               style={{
-                width: 35,
-                height: 35,
+                width: 40,
+                height: 40,
                 borderRadius: 50,
                 borderColor: styles.borderColor,
                 borderWidth: 2,
@@ -78,7 +101,7 @@ const SocialHeader = () => {
             fontFamily: 'Roboto-Medium',
             color: styles.textColor,
           }}>
-          Mick John
+          {data.name}
         </Text>
       </TouchableOpacity>
 

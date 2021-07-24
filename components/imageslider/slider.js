@@ -17,11 +17,12 @@ export default class FlatListSlider extends Component {
   static defaultProps = {
     data: [],
     imageKey: 'image',
+    videoKey: 'video',
     local: false,
     width: Math.round(Dimensions.get('window').width),
     height: 230,
     separatorWidth: 0,
-    loop: true,
+    loop: false,
     indicator: true,
     indicatorStyle: {},
     indicatorContainerStyle: {},
@@ -29,10 +30,11 @@ export default class FlatListSlider extends Component {
     indicatorInActiveColor: '#bdc3c7',
     indicatorActiveWidth: 6,
     animation: true,
-    autoscroll: true,
+    autoscroll: false,
     timer: 3000,
     onPress: {},
     contentContainerStyle: {},
+    videoLocal: false,
     component: <ChildItem />,
   };
 
@@ -91,6 +93,8 @@ export default class FlatListSlider extends Component {
               active: index === this.state.index,
               local: this.props.local,
               height: this.props.height,
+              videoKey: this.props.videoKey,
+              videoLocal: this.props.videoLocal,
             })
           }
           ItemSeparatorComponent={() => (

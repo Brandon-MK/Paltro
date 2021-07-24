@@ -1,7 +1,9 @@
 import React from 'react';
 import {View, Image, Text} from 'react-native';
+import {ThemeProvider, ThemeContext} from '../theme/themeManger';
 
 const NotificationCard = props => {
+  const {styles} = React.useContext(ThemeContext);
   const BadgeView = () => {
     if (props.new) {
       return (
@@ -27,7 +29,7 @@ const NotificationCard = props => {
           flexDirection: 'row',
           alignItems: 'center',
           alignSelf: 'center',
-          backgroundColor: 'white',
+          backgroundColor: styles.cardBackground,
           //elevation: 5,
           borderRadius: 40,
           width: '100%',
@@ -41,7 +43,7 @@ const NotificationCard = props => {
           style={{width: 50, height: 50, borderRadius: 50}}
         />
         <View style={{width: '80%', marginHorizontal: 10}}>
-          <Text>{props.notification}</Text>
+          <Text style={{color: styles.textColor}}>{props.notification}</Text>
           <Text style={{color: 'grey', fontSize: 12}}>{props.timestamp}</Text>
         </View>
       </View>

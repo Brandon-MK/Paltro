@@ -1,15 +1,36 @@
-import React from 'react';
-import {FlatList, View} from 'react-native';
+import React, {useState} from 'react';
+import {FlatList, View, RefreshControl} from 'react-native';
 import data from '../data';
 import ImageCard from './ImageCard';
 import TextCard from './TextCard';
 import SocialStory from './SocialStory';
+import SocialBlog from './SocialBlog';
 
 const SocialCard = () => {
+  const [refreshing, setRefreshing] = useState(false);
+  const onRefresh = () => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 500);
+  };
   return (
     <FlatList
       data={data}
-      ListHeaderComponent={<SocialStory />}
+      refreshControl={
+        <RefreshControl
+          colors={['#00A4FD', '#00C5FD']}
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+          tintColor={'#222222'}
+        />
+      }
+      ListHeaderComponent={
+        <View>
+          <SocialStory />
+          <SocialBlog />
+        </View>
+      }
       renderItem={({item}) => {
         return item.posts.map(vals => {
           if (vals.type === 'Image') {

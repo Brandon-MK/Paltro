@@ -3,6 +3,7 @@ import {View, Text, FlatList} from 'react-native';
 import {Input} from 'native-base';
 import ChatView from '../../components/ChatView';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {ThemeProvider, ThemeContext} from '../../theme/themeManger';
 
 const ChatSocial = () => {
   const data = [
@@ -43,16 +44,21 @@ const ChatSocial = () => {
       message: '😆😆😆😆😆😆😆😆',
     },
   ];
+  const {styles} = React.useContext(ThemeContext);
   return (
-    <View>
+    <View style={{flex: 1, backgroundColor: styles.Background}}>
       <View style={{padding: 10}}>
-        <Text style={{fontSize: 20, marginVertical: 10}}>Messages</Text>
+        <Text
+          style={{fontSize: 20, marginVertical: 10, color: styles.textColor}}>
+          Messages
+        </Text>
         <Input
           placeholder={'Search'}
           variant={'filled'}
           InputLeftElement={
             <Ionicons name="search" size={20} style={{marginLeft: 10}} />
           }
+          backgroundColor={styles.inputBackground}
         />
       </View>
       <View>
@@ -62,7 +68,7 @@ const ChatSocial = () => {
             <View
               style={{
                 width: '95%',
-                borderColor: '#e5e5e5',
+                borderColor: styles.profileCard,
                 borderBottomWidth: 1,
                 alignSelf: 'center',
               }}

@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import {View, Text, Animated, Image} from 'react-native';
+import {View, Text, Animated, Image, Dimensions} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Avatar, Input} from 'native-base';
@@ -10,13 +10,13 @@ import BottomSheet from './bottomSheet';
 import {ScrollView} from 'react-native';
 import {ThemeContext} from '../theme/themeManger';
 import LoadingImage from './loadingImage';
+import FlatListSlider from './imageslider/slider';
 
 const ImageCard = props => {
   const refRBSheet = useRef();
   const {styles} = React.useContext(ThemeContext);
   const [loading, setLoading] = useState(true);
   const [imageLoading, setImageLoading] = useState(true);
-
   const TimeStamp = time => {
     const Months = {
       0: 'Jan',
@@ -50,6 +50,7 @@ const ImageCard = props => {
       } ${time.getFullYear()}`}</Text>
     );
   };
+  const width = Dimensions.get('window').width;
   const commentView = () => {
     // console.table(...props.Comments);
     if (props.Comments.length > 0) {
@@ -158,17 +159,36 @@ const ImageCard = props => {
           <Feather name="more-horizontal" size={24} />
         </View>
       </View>
-      <View style={{height: 200, marginVertical: 15}}>
-        <View>
-          <Image
-            source={{
-              uri: props.Source,
-            }}
-            onLoadEnd={() => setImageLoading(false)}
-            style={{height: '100%', width: '100%'}}
+      <View style={{height: 250, marginVertical: 15}}>
+        {Array.isArray(props.Source) ? (
+          <FlatListSlider
+            data={props.Source}
+            imageKey={'image'}
+            videoKey={'video'}
+            local={false}
+            loop={false}
+            separator={0}
+            width={width * 0.95}
+            height={250}
+            indicatorContainerStyle={{position: 'absolute', bottom: 20}}
+            //currentIndexCallback={index => console.log('Index', index)}
+            onPress={item => alert(JSON.stringify(item))}
+            indicatorActiveColor={'black'}
+            indicatorInActiveColor={'grey'}
+            indicator
           />
-          {imageLoading ? <LoadingImage type="image" /> : null}
-        </View>
+        ) : (
+          <View>
+            <Image
+              source={{
+                uri: props.Source,
+              }}
+              onLoadEnd={() => setImageLoading(false)}
+              style={{height: '100%', width: '100%'}}
+            />
+            {imageLoading ? <LoadingImage type="image" /> : null}
+          </View>
+        )}
       </View>
       <View
         style={{

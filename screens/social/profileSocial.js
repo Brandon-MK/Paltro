@@ -1,12 +1,21 @@
-import React, {useState} from 'react';
-import {View, Text, Image, ScrollView} from 'react-native';
+import React, {useState, useRef} from 'react';
+import {
+  View,
+  Text,
+  Image,
+  ScrollView,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {Tab, TabView} from 'react-native-elements';
-import {TouchableOpacity} from 'react-native';
+import Feather from 'react-native-vector-icons/Feather';
 import {useNavigation} from '@react-navigation/native';
 import TextCard from '../../components/TextCard';
+import axios from 'axios';
+import {ThemeProvider, ThemeContext} from '../../theme/themeManger';
 
 const ProfileSocial = () => {
+  var tabsRef = useRef();
   const profileImage =
     'https://images.unsplash.com/photo-1563122870-6b0b48a0af09?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=334&q=80';
   const Images = [
@@ -123,7 +132,8 @@ const ProfileSocial = () => {
   ];
   const [Tab, setTab] = useState(0);
   const navigation = useNavigation();
-  const TabView = () => {
+  const {styles} = React.useContext(ThemeContext);
+  const TabViews = () => {
     if (Tab === 0) {
       return (
         <View>
@@ -187,8 +197,30 @@ const ProfileSocial = () => {
       );
     }
   };
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  // const profile = () => {
+  //   axios
+  //     .get(
+  //       'http://192.168.0.101:5000/paltroServer/v1/accountFeed/nMqQQVTdPFj5G72zt0hX',
+  //     )
+  //     .then(data => {
+  //       setData(data.data);
+  //       setLoading(false);
+  //     })
+  //     .catch(err => console.log(err));
+  // };
+  // React.useEffect(() => {
+  //   profile();
+  // }, []);
+  const width = Dimensions.get('window').width;
+
+  const ScrollToNext = index => {
+    tabsRef.current.scrollTo({x: width * index, animated: true});
+  };
+
   return (
-    <View>
+    <View style={{backgroundColor: styles.Background, flex: 1}}>
       <View>
         <View
           style={{
@@ -197,57 +229,146 @@ const ProfileSocial = () => {
             justifyContent: 'space-between',
             padding: 10,
             paddingHorizontal: 10,
-            backgroundColor: 'white',
+            backgroundColor: styles.cardBackground,
             elevation: 2,
           }}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Ionicons name="chevron-back-outline" size={30} />
+            <Ionicons
+              name="chevron-back-outline"
+              size={30}
+              color={styles.textColor}
+            />
           </TouchableOpacity>
-
-          <Text style={{fontSize: 18, fontFamily: 'Roboto-Medium'}}>
-            Mick John
-          </Text>
-          <Ionicons name="settings-outline" size={30} />
+          <Feather name="user" size={30} color={styles.textColor} />
         </View>
       </View>
       <ScrollView>
         <View
           style={{
-            marginTop: 30,
+            marginTop: 10,
+            flexDirection: 'row',
             alignItems: 'center',
-            justifyContent: 'center',
+            justifyContent: 'space-evenly',
+            marginBottom: 10,
           }}>
-          <Image
-            source={{
-              uri: profileImage,
-            }}
-            style={{width: 100, height: 100, borderRadius: 50}}
-          />
+          {loading == false ? (
+            <Image
+              source={{
+                uri: data.profileImage,
+              }}
+              style={{width: 100, height: 100, borderRadius: 50}}
+            />
+          ) : (
+            <View>
+              <Image
+                source={require('../../images/user.png')}
+                style={{width: 90, height: 90, borderRadius: 50}}
+              />
+            </View>
+          )}
+
           <View
             style={{
               marginVertical: 10,
+              alignItems: 'flex-start',
+              justifyContent: 'flex-start',
+            }}>
+            <Text
+              style={{
+                fontSize: 18,
+                fontFamily: 'Roboto-Medium',
+                color: styles.textColor,
+              }}>
+              {loading == false ? data.name : 'Mick John'}
+            </Text>
+            <Text style={{fontSize: 13, color: styles.textColor}}>
+              {loading == false ? `@${data.username}` : '@MickJohn'}
+            </Text>
+          </View>
+        </View>
+        <View
+          style={{
+            marginBottom: 10,
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <View
+            style={{
+              backgroundColor: '#20a8fc',
+              minWidth: 120,
+              height: 40,
+              marginRight: 1,
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-            <Text style={{fontSize: 20}}>@johnmick</Text>
-            <Text
-              style={{
-                textAlign: 'center',
-                marginVertical: 5,
-              }}>{`Hello👋,\nPhotographer at heart, 💕\nPictures by passion📷`}</Text>
+            <Text style={{padding: 5, fontSize: 18, color: styles.textColor}}>
+              Settings
+            </Text>
+          </View>
+          <View
+            style={{
+              borderColor: '#20a8fc',
+              borderWidth: 1,
+              minWidth: 45,
+              height: 40,
+              marginRight: 1,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <Feather
+              name="instagram"
+              color={styles.textColor}
+              size={25}
+              style={{padding: 5}}
+            />
+          </View>
+          <View
+            style={{
+              borderColor: '#20a8fc',
+              borderWidth: 1,
+              minWidth: 45,
+              height: 40,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <Feather
+              name="chevron-down"
+              color={styles.textColor}
+              size={25}
+              style={{padding: 5}}
+            />
           </View>
         </View>
-
+        <View style={{marginBottom: 5}}>
+          <Text
+            style={{
+              textAlign: 'center',
+              marginVertical: 5,
+              color: styles.textColor,
+            }}>
+            {loading == false
+              ? data.Bio.replace('\\n', '\n')
+              : "My Bio \n Really don't have anything to say"}
+          </Text>
+        </View>
         <View
           style={{
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between',
             paddingHorizontal: 50,
+            marginTop: 5,
+            marginBottom: 10,
           }}>
           <View>
             <Text
-              style={{textAlign: 'center', fontSize: 20, fontWeight: 'bold'}}>
+              style={{
+                textAlign: 'center',
+                fontSize: 20,
+                fontWeight: 'bold',
+                color: styles.textColor,
+              }}>
               12K
             </Text>
             <Text style={{fontSize: 12, color: 'grey', textAlign: 'center'}}>
@@ -256,7 +377,12 @@ const ProfileSocial = () => {
           </View>
           <View>
             <Text
-              style={{textAlign: 'center', fontSize: 20, fontWeight: 'bold'}}>
+              style={{
+                textAlign: 'center',
+                fontSize: 20,
+                fontWeight: 'bold',
+                color: styles.textColor,
+              }}>
               50
             </Text>
             <Text style={{fontSize: 12, color: 'grey', textAlign: 'center'}}>
@@ -265,7 +391,12 @@ const ProfileSocial = () => {
           </View>
           <View>
             <Text
-              style={{textAlign: 'center', fontSize: 20, fontWeight: 'bold'}}>
+              style={{
+                textAlign: 'center',
+                fontSize: 20,
+                fontWeight: 'bold',
+                color: styles.textColor,
+              }}>
               10
             </Text>
             <Text style={{fontSize: 12, color: 'grey', textAlign: 'center'}}>
@@ -273,70 +404,89 @@ const ProfileSocial = () => {
             </Text>
           </View>
         </View>
-        <View style={{marginTop: 10}}>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              padding: 5,
-              borderColor: '#e5e5e5',
-              borderTopWidth: 1,
-              borderBottomWidth: 1,
-              paddingHorizontal: 10,
-              backgroundColor: 'white',
-            }}>
-            <View
-              style={{
-                borderColor: '#20a8fc',
-                borderBottomWidth: Tab === 0 ? 2 : 0,
-              }}>
-              <TouchableOpacity onPress={() => setTab(0)}>
-                <Text style={{color: Tab === 0 ? 'black' : 'grey', padding: 5}}>
-                  Blogs
-                </Text>
-              </TouchableOpacity>
-            </View>
-            <View
-              style={{
-                borderColor: '#20a8fc',
-                borderBottomWidth: Tab === 1 ? 2 : 0,
-              }}>
-              <TouchableOpacity onPress={() => setTab(1)}>
-                <Text style={{color: Tab === 1 ? 'black' : 'grey', padding: 5}}>
-                  Images
-                </Text>
-              </TouchableOpacity>
-            </View>
-            <View
-              style={{
-                borderColor: '#20a8fc',
-                borderBottomWidth: Tab === 2 ? 2 : 0,
-              }}>
-              <TouchableOpacity onPress={() => setTab(2)}>
-                <Text style={{color: Tab === 2 ? 'black' : 'grey', padding: 5}}>
-                  Tags
-                </Text>
-              </TouchableOpacity>
-            </View>
-            <View
-              style={{
-                borderColor: '#20a8fc',
-                borderBottomWidth: Tab === 3 ? 2 : 0,
-              }}>
-              <TouchableOpacity onPress={() => setTab(3)}>
-                <Text style={{color: Tab === 3 ? 'black' : 'grey', padding: 5}}>
-                  Mentions
-                </Text>
-              </TouchableOpacity>
-            </View>
+
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            height: 55,
+            justifyContent: 'space-between',
+            paddingHorizontal: 15,
+            elevation: 5,
+            backgroundColor: styles.cardBackground,
+          }}>
+          <View>
+            <TouchableOpacity onPress={() => ScrollToNext(1)}>
+              <Text
+                style={{
+                  fontSize: 15,
+                  color: styles.textColor,
+                }}>
+                IMAGES
+              </Text>
+            </TouchableOpacity>
           </View>
           <View>
-            <View>
-              <TabView />
-            </View>
+            <TouchableOpacity onPress={() => ScrollToNext(1)}>
+              <Text
+                style={{
+                  fontSize: 15,
+                  color: styles.textColor,
+                }}>
+                JETS
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View>
+            <TouchableOpacity onPress={() => ScrollToNext(3)}>
+              <Text
+                style={{
+                  fontSize: 15,
+                  color: styles.textColor,
+                }}>
+                MENTIONS
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          ref={tabsRef}
+          pagingEnabled>
+          <View style={{flexDirection: 'row'}}>
+            <View
+              style={{
+                backgroundColor: 'teal',
+                width: width,
+                height: '100%',
+              }}>
+              <View style={{padding: 10}}>
+                <Text>First Screen</Text>
+              </View>
+            </View>
+            <View
+              style={{
+                backgroundColor: 'orange',
+                width: width,
+                height: '100%',
+              }}>
+              <View style={{padding: 10}}>
+                <Text>Second Screen</Text>
+              </View>
+            </View>
+            <View
+              style={{
+                backgroundColor: 'grey',
+                width: width,
+                height: '100%',
+              }}>
+              <View style={{padding: 10}}>
+                <Text>Third Screen</Text>
+              </View>
+            </View>
+          </View>
+        </ScrollView>
       </ScrollView>
     </View>
   );

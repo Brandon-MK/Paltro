@@ -20,19 +20,7 @@ const Choices = props => {
         }}>
         <Text style={{fontSize: 20, marginHorizontal: 10}}>Social</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        style={[
-          styles.choice,
-          {
-            backgroundColor: props.Food ? '#ffcf00' : '#f4f8ff',
-            elevation: props.Food ? 5 : 0,
-          },
-        ]}
-        onPress={() => {
-          navigation.navigate('HomeFood');
-        }}>
-        <Text style={{fontSize: 20, marginHorizontal: 10}}>Food</Text>
-      </TouchableOpacity>
+
       <TouchableOpacity
         style={[
           styles.choice,

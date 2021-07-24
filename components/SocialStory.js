@@ -3,6 +3,7 @@ import {View, Image, FlatList, Text, Pressable} from 'react-native';
 import {ThemeContext} from '../theme/themeManger';
 import {useNavigation} from '@react-navigation/native';
 import LoadingImage from './loadingImage';
+import LinearGradient from 'react-native-linear-gradient';
 
 const SocialStory = () => {
   const {styles} = React.useContext(ThemeContext);
@@ -56,12 +57,14 @@ const SocialStory = () => {
           marginHorizontal: 8,
         }}>
         <Pressable onPress={() => navigation.navigate('SocialStory')}>
-          <View
+          <LinearGradient
+            colors={['#18cc21', '#00d4ff']}
             style={{
               borderRadius: 50,
-              borderColor: '#20a8fc',
-              borderWidth: 2,
-              borderStyle: 'dashed',
+              width: 53,
+              height: 53,
+              alignItems: 'center',
+              justifyContent: 'center',
             }}>
             <View>
               <Image
@@ -70,12 +73,11 @@ const SocialStory = () => {
                   width: 50,
                   height: 50,
                   borderRadius: 50,
-                  margin: 1,
                 }}
               />
               {Loading ? <LoadingImage type={'user'} /> : null}
             </View>
-          </View>
+          </LinearGradient>
         </Pressable>
         <Text style={{fontSize: 12, color: styles.textColor}}>{item.name}</Text>
       </View>

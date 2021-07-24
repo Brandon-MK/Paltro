@@ -1,6 +1,8 @@
 import React from 'react';
 import {View, Text, FlatList} from 'react-native';
 import NotificationCard from '../../components/notificationCard';
+import {useNavigation} from '@react-navigation/native';
+import {ThemeProvider, ThemeContext} from '../../theme/themeManger';
 
 const NotiSocial = () => {
   const Notifications = [
@@ -45,10 +47,16 @@ const NotiSocial = () => {
       new: false,
     },
   ];
+  const navigation = useNavigation();
+  const {styles} = React.useContext(ThemeContext);
   return (
-    <View style={{padding: 10, backgroundColor: '#e5e5e5', flex: 1}}>
+    <View style={{padding: 10, backgroundColor: styles.Background, flex: 1}}>
       <View>
-        <Text style={{fontSize: 20}}>Notifications</Text>
+        <Text
+          style={{fontSize: 20, color: styles.textColor}}
+          onPress={() => navigation.navigate('Notification')}>
+          Notifications
+        </Text>
       </View>
       <View style={{marginVertical: 10}}>
         <View style={{marginBottom: 5}}>

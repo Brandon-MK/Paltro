@@ -4,6 +4,7 @@ import {Input, Tabs} from 'native-base';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import TextCard from '../../components/TextCard';
 import {useNavigation} from '@react-navigation/native';
+import {ThemeProvider, ThemeContext} from '../../theme/themeManger';
 
 const SearchSocial = () => {
   const Images = [
@@ -168,14 +169,7 @@ const SearchSocial = () => {
   const navigation = useNavigation();
   const [selection, setSelection] = useState('picture');
   const [drop, setdrop] = useState(false);
-
-  const slideAnim = useRef(new Animated.Value(-100)).current;
-  const SlideIn = () => {
-    Animated.spring(slideAnim, {
-      toValue: 0,
-      useNativeDriver: true,
-    }).start();
-  };
+  const {styles} = React.useContext(ThemeContext);
 
   const users = () => {
     return (
@@ -217,7 +211,7 @@ const SearchSocial = () => {
                 </View>
               </View>
               <View style={{alignItems: 'center'}}>
-                <Text>{item.name}</Text>
+                <Text style={{color: styles.textColor}}>{item.name}</Text>
                 <Text style={{fontSize: 12, color: 'grey'}}>
                   @{item.usename}
                 </Text>
@@ -266,6 +260,7 @@ const SearchSocial = () => {
                 Timestamp={item.timestamp}
                 ProfileImage={item.profileImage}
                 Text={item.text}
+                Comments={[]}
               />
             </View>
           );
@@ -337,26 +332,20 @@ const SearchSocial = () => {
     }
   };
   return (
-    <View style={{backgroundColor: 'white'}}>
+    <View style={{backgroundColor: styles.Background, flex: 1}}>
       <View
         style={{
-          backgroundColor: 'white',
+          backgroundColor: styles.cardBackground,
           elevation: 5,
           padding: 5,
         }}>
-        <View
-          style={{
-            paddingVertical: 5,
-            left: 10,
-          }}>
-          <Text style={{fontSize: 20}}>Search</Text>
-        </View>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <View style={{width: '90%', alignSelf: 'center'}}>
             <Input
               variant={'filled'}
               height={50}
               placeholder={'Looking for something'}
+              backgroundColor={styles.inputBackground}
               InputLeftElement={
                 <Ionicons
                   name="search-outline"
@@ -370,23 +359,17 @@ const SearchSocial = () => {
           <View style={{marginHorizontal: 5}}>
             <TouchableOpacity
               onPress={() => {
-                SlideIn();
                 setdrop(!drop);
               }}>
-              <Ionicons name={drop ? 'chevron-up' : 'chevron-down'} size={30} />
+              <Ionicons
+                name={drop ? 'chevron-up' : 'chevron-down'}
+                size={30}
+                color={styles.textColor}
+              />
             </TouchableOpacity>
           </View>
         </View>
-        <Animated.View
-          style={{
-            transform: [
-              {
-                translateY: slideAnim,
-              },
-            ],
-          }}>
-          {select()}
-        </Animated.View>
+        <View>{select()}</View>
       </View>
       {Views()}
     </View>

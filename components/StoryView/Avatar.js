@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 16,
     alignItems: 'center',
-    marginTop: 2,
   },
   avatar: {
     width: 36,

@@ -1,34 +1,33 @@
 {
   "project_info": {
-    "project_number": "209406333933",
-    "firebase_url": "https://paltro-23ab9.firebaseio.com",
-    "project_id": "paltro-23ab9",
-    "storage_bucket": "paltro-23ab9.appspot.com"
+    "project_number": "368505494341",
+    "project_id": "doodles-a4c10",
+    "storage_bucket": "doodles-a4c10.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:209406333933:android:0e632c3cb642dca13e0de4",
+        "mobilesdk_app_id": "1:368505494341:android:1fe06d4ff26802f57abc2c",
         "android_client_info": {
           "package_name": "com.paltro"
         }
       },
       "oauth_client": [
         {
-          "client_id": "209406333933-g46g825m1hoea382e2t4iu83fhr9gtq6.apps.googleusercontent.com",
+          "client_id": "368505494341-pc0t7s7dp5fcff1725oisngffc0ouv1u.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCmIpOPfHPPzvzNzfMFA71eECtUcR6kHy8"
+          "current_key": "AIzaSyAj-SuXkjl7H4aYfMmovkYm9JsPcgo6vMA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "209406333933-g46g825m1hoea382e2t4iu83fhr9gtq6.apps.googleusercontent.com",
+              "client_id": "368505494341-pc0t7s7dp5fcff1725oisngffc0ouv1u.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

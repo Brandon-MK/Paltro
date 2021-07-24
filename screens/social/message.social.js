@@ -2,6 +2,7 @@ import React, {useState, useRef, useEffect} from 'react';
 import {View, FlatList, Text, TextInput, Keyboard, Image} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
+import {ThemeProvider, ThemeContext} from '../../theme/themeManger';
 
 const MessageScreen = ({route, navigation}) => {
   const {name, profileImage} = route.params;
@@ -18,6 +19,7 @@ const MessageScreen = ({route, navigation}) => {
     },
     {id: '2', message: 'Ok would be great', timestamp: '8:30 pm', key: '5'},
   ]);
+  const {styles} = React.useContext(ThemeContext);
   const flatlistRef = useRef();
   const scrollToEnd = () => {
     flatlistRef.current.scrollToEnd({animating: true});
@@ -39,14 +41,14 @@ const MessageScreen = ({route, navigation}) => {
   const _keyboardDidHide = () => setKeyboardStatus(false);
 
   return (
-    <View style={{minHeight: '100%'}}>
+    <View style={{minHeight: '100%', backgroundColor: styles.Background}}>
       <View
         style={{
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: 10,
-          backgroundColor: 'white',
+          backgroundColor: styles.cardBackground,
           elevation: 3,
         }}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -55,6 +57,7 @@ const MessageScreen = ({route, navigation}) => {
               name="chevron-back"
               size={25}
               onPress={() => navigation.goBack()}
+              color={styles.textColor}
             />
           </View>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -62,14 +65,15 @@ const MessageScreen = ({route, navigation}) => {
               source={{uri: profileImage}}
               style={{height: 30, width: 30, borderRadius: 50}}
             />
-            <Text style={{fontSize: 17, marginLeft: 10}}>
+            <Text
+              style={{fontSize: 17, marginLeft: 10, color: styles.textColor}}>
               {JSON.stringify(name).slice(1, name.length + 1)}
             </Text>
           </View>
         </View>
 
         <View>
-          <Feather name="more-horizontal" size={25} />
+          <Feather name="more-horizontal" size={25} color={styles.textColor} />
         </View>
       </View>
       {/* 75% for when the keyboard arises and 84% */}
@@ -114,7 +118,7 @@ const MessageScreen = ({route, navigation}) => {
           onChangeText={text => setInput(text)}
           style={{
             width: '85%',
-            backgroundColor: '#e5e5e5',
+            backgroundColor: styles.inputBackground,
             paddingLeft: 10,
             maxHeight: input.includes('\n') ? 100 : 50,
           }}

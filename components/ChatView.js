@@ -2,9 +2,11 @@ import React from 'react';
 import {View, Text, Image, TouchableWithoutFeedback} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {ThemeProvider, ThemeContext} from '../theme/themeManger';
 
 const ChatView = props => {
   const navigation = useNavigation();
+  const {styles} = React.useContext(ThemeContext);
   return (
     <TouchableWithoutFeedback
       onPress={() =>
@@ -37,7 +39,9 @@ const ChatView = props => {
               justifyContent: 'space-between',
             }}>
             <View>
-              <Text style={{fontSize: 15}}>{props.name}</Text>
+              <Text style={{fontSize: 15, color: styles.textColor}}>
+                {props.name}
+              </Text>
             </View>
             <View>
               <Text>{props.timeStamp}</Text>
@@ -54,7 +58,7 @@ const ChatView = props => {
               style={{
                 minWidth: 23,
                 height: 23,
-                backgroundColor: '#00FF00',
+                backgroundColor: styles.bagdeBackground,
                 borderRadius: 20,
                 alignItems: 'center',
               }}>

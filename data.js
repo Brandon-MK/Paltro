@@ -61,8 +61,38 @@ const data = [
       },
       {
         type: 'Image',
-        source:
-          'https://images.unsplash.com/photo-1521819342394-5f3dd1b43ba1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=784&q=80',
+        source: [
+          {
+            key: '1',
+            type: 'Image',
+            image:
+              'https://images.unsplash.com/photo-1581285025904-e7f1a94c330b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8d2F0ZXIlMjBiYWNrZ3JvdW5kfGVufDB8MHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+          },
+          {
+            key: '2',
+            type: 'Image',
+            image:
+              'https://images.unsplash.com/photo-1521819342394-5f3dd1b43ba1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=784&q=80',
+          },
+          {
+            key: '3',
+            type: 'Image',
+            image:
+              'https://images.unsplash.com/photo-1616033481409-1bc22a923483?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fHdhdGVyJTIwYmFja2dyb3VuZHxlbnwwfDB8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+          },
+          {
+            key: '4',
+            type: 'Video',
+            video:
+              'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+          },
+          {
+            key: 5,
+            type: 'Video',
+            video:
+              'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+          },
+        ],
         timestamp: new Date('November 15, 2012 05:08:00'),
         key: '2',
         text: 'Children bring joy and happiness.',

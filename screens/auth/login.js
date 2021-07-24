@@ -3,11 +3,14 @@ import {View, Image} from 'react-native';
 import {Text, Icon} from 'native-base';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 import {Button, SocialIcon, Input} from 'react-native-elements';
+import Auth from '@react-native-firebase/auth';
+import {ThemeContext} from '../../theme/themeManger';
 
 export const login = ({navigation}) => {
   const [email, setemail] = useState('');
   const [password, setpassword] = useState('');
   const [secure, setsecure] = useState(false);
+  const {ChangeUserId} = React.useContext(ThemeContext);
 
   const ViewIconText = () => {
     if (password.length === 0) {
@@ -22,6 +25,16 @@ export const login = ({navigation}) => {
         />
       );
     }
+  };
+
+  const login = () => {
+    Auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(data => {
+        ChangeUserId(email);
+        navigation.navigate('HomeSocial');
+      })
+      .catch(err => console.log(err));
   };
 
   return (
@@ -77,8 +90,7 @@ export const login = ({navigation}) => {
           title="Login"
           buttonStyle={{backgroundColor: '#53BDFF'}}
           onPress={() => {
-            console.log(`${email} - ${password}`);
-            navigation.navigate('HomeSocial');
+            login();
           }}
         />
       </View>
