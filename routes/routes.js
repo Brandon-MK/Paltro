@@ -2,10 +2,11 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {ThemeProvider, ThemeContext} from '../theme/themeManger';
+import {ThemeProvider, ThemeContext} from '../MainContext/MainContext';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import login from '../screens/auth/login';
 import SignUp from '../screens/auth/signup';
 import HomeSocial from '../screens/social/homeSocial';
@@ -22,14 +23,23 @@ import CategoryView from '../screens/shop/categoryView';
 import ItemViewShop from '../screens/shop/ItemViewShop';
 import HomePodcast from '../screens/podcast/homePodcast';
 import SearchPodcast from '../screens/podcast/searchPodcast';
-import ProfilePodcast from '../screens/podcast/profilePodcast';
+import AddShoppingItem from '../screens/shop/AddShopingItem';
 import PodcastPlayer from '../screens/podcast/podcastPlayer';
-import StoryView from '../screens/social/StoryView';
 import LoadingScreen from '../components/LoadingScreen';
 import Notification from '../components/notification';
 import Camera from '../screens/social/Camera';
 import EditImage from '../screens/social/EditImage';
 import JetScreen from '../screens/social/jet';
+import Setting from '../screens/social/setting';
+import SettingView from '../screens/social/SettingView';
+import SearchShop from '../screens/shop/searchshop';
+import ShopNotification from '../screens/shop/shopNotification';
+import ActivityPodcast from '../screens/podcast/ActivityPodcast';
+import StoryCreator from '../screens/social/storyCreator';
+import SplashScreen from '../splashscreen';
+import Stories from '../components/Story/Stories';
+import ProductsView from '../screens/shop/ProductsView';
+import IncomingOrders from '../screens/shop/IncomingOrders';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -233,6 +243,107 @@ const ShopBottomTabs = () => {
   );
 };
 
+const ShopBussinessBottomTabs = () => {
+  const {styles} = React.useContext(ThemeContext);
+  const bottomStyle = {
+    backgroundColor: styles.cardBackground,
+    borderTopWidth: 0,
+  };
+  const bottomOptions = {
+    showLabel: false,
+    keyboardHidesTabBar: true,
+    style: bottomStyle,
+  };
+  return (
+    <Tab.Navigator tabBarOptions={bottomOptions}>
+      <Tab.Screen
+        name="HomeShop"
+        component={HomeShop}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <AntDesign
+              name="home"
+              size={30}
+              color={
+                styles.cardBackground === '#222222'
+                  ? focused
+                    ? 'white'
+                    : 'grey'
+                  : focused
+                  ? 'black'
+                  : 'grey'
+              }
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="AddShoppingItem"
+        component={AddShoppingItem}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <Feather
+              name="plus"
+              size={30}
+              color={
+                styles.cardBackground === '#222222'
+                  ? focused
+                    ? 'white'
+                    : 'grey'
+                  : focused
+                  ? 'black'
+                  : 'grey'
+              }
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="ProductsView"
+        component={ProductsView}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <Feather
+              name="folder"
+              size={30}
+              color={
+                styles.cardBackground === '#222222'
+                  ? focused
+                    ? 'white'
+                    : 'grey'
+                  : focused
+                  ? 'black'
+                  : 'grey'
+              }
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="IncomingOrders"
+        component={IncomingOrders}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <MaterialCommunityIcons
+              name="truck-outline"
+              size={30}
+              color={
+                styles.cardBackground === '#222222'
+                  ? focused
+                    ? 'white'
+                    : 'grey'
+                  : focused
+                  ? 'black'
+                  : 'grey'
+              }
+            />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  );
+};
+
 const PodcastBottomTabs = () => {
   const {styles} = React.useContext(ThemeContext);
   const bottomStyle = {
@@ -289,12 +400,12 @@ const PodcastBottomTabs = () => {
         }}
       />
       <Tab.Screen
-        name="ProfilePodcast"
-        component={ProfilePodcast}
+        name="ActivityPodcast"
+        component={ActivityPodcast}
         options={{
           tabBarIcon: ({focused}) => (
             <Feather
-              name="user"
+              name="activity"
               size={30}
               color={
                 styles.cardBackground === '#222222'
@@ -316,14 +427,16 @@ const PodcastBottomTabs = () => {
 function MainStack() {
   return (
     <NavigationContainer>
-      <Stack.Navigator headerMode={false} initialRouteName={'HomeSocial'}>
+      <Stack.Navigator headerMode={false} initialRouteName={'SplashScreen'}>
         <Stack.Screen name="login" component={login} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="HomeSocial" component={SocialBottomTabs} />
         <Stack.Screen name="ProfileSocial" component={ProfileSocial} />
         <Stack.Screen name="SearchSocial" component={SearchSocial} />
-        <Stack.Screen name="SocialStory" component={StoryView} />
-        <Stack.Screen name="HomeShop" component={ShopBottomTabs} />
+        <Stack.Screen name="SocialStory" component={Stories} />
+        <Stack.Screen name="HomeShop" component={ShopBussinessBottomTabs} />
+        <Stack.Screen name="ShopNotifications" component={ShopNotification} />
+        <Stack.Screen name="ShopSearch" component={SearchShop} />
         <Stack.Screen name="HomePodcast" component={PodcastBottomTabs} />
         <Stack.Screen name="DiscoverSocial" component={DiscoverSocial} />
         <Stack.Screen name="MessageSocial" component={MessageScreen} />
@@ -335,6 +448,10 @@ function MainStack() {
         <Stack.Screen name="Camera" component={Camera} />
         <Stack.Screen name="EditImage" component={EditImage} />
         <Stack.Screen name="JetScreen" component={JetScreen} />
+        <Stack.Screen name="Setting" component={Setting} />
+        <Stack.Screen name="SplashScreen" component={SplashScreen} />
+        <Stack.Screen name="SettingView" component={SettingView} />
+        <Stack.Screen name="StoryCreator" component={StoryCreator} />
       </Stack.Navigator>
     </NavigationContainer>
   );

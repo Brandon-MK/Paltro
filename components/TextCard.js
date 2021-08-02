@@ -5,12 +5,13 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import BottomSheet from './bottomSheet';
 import {Input} from 'native-base';
-import {ThemeContext} from '../theme/themeManger';
+import {ThemeContext} from '../MainContext/MainContext';
 import LoadingImage from './loadingImage';
 
 const TextCard = props => {
   const {styles} = React.useContext(ThemeContext);
   const [loading, setLoading] = useState(true);
+  const [liked, setLiked] = useState(false);
   const TimeStamp = time => {
     const Months = {
       0: 'Jan',
@@ -209,7 +210,12 @@ const TextCard = props => {
             justifyContent: 'space-between',
           }}>
           <View>
-            <Ionicons name="heart-outline" size={32} color={styles.IconColor} />
+            <Ionicons
+              name="heart-outline"
+              size={32}
+              color={liked ? 'red' : styles.IconColor}
+              onPress={() => setLiked(!liked)}
+            />
           </View>
           <View>
             <Ionicons

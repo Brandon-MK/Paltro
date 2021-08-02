@@ -3,6 +3,7 @@ import {View, Text, Image, TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
 import {ScrollView} from 'react-native';
+import {ThemeProvider, ThemeContext} from '../../MainContext/MainContext';
 
 const ItemViewShop = ({route}) => {
   const {item} = route.params;
@@ -48,25 +49,27 @@ const ItemViewShop = ({route}) => {
       ],
     },
   ];
+  const {styles, dark} = React.useContext(ThemeContext);
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, backgroundColor: styles.Background}}>
       <ScrollView>
         <View>
           <Image
-            source={{uri: item.image}}
+            source={{uri: item.Image}}
             style={{width: '100%', height: 200}}
           />
           <View
             style={{
               position: 'absolute',
               padding: 5,
-              backgroundColor: '#eaeaea',
+              backgroundColor: styles.Background,
               borderRadius: 10,
               margin: 10,
             }}>
             <Ionicons
               name={'chevron-back'}
               size={25}
+              color={styles.textColor}
               onPress={() => navigation.goBack()}
             />
           </View>
@@ -79,15 +82,20 @@ const ItemViewShop = ({route}) => {
               alignItems: 'center',
               justifyContent: 'space-between',
             }}>
-            <Text style={{fontSize: 20}}>{item.name}</Text>
-            <View style={{backgroundColor: '#eaeaea', padding: 5}}>
-              <Ionicons name="cart-outline" size={30} />
+            <Text style={{fontSize: 20, color: styles.textColor}}>
+              {item.Name}
+            </Text>
+            <View>
+              <Ionicons
+                name="cart-outline"
+                size={30}
+                color={styles.textColor}
+              />
             </View>
           </View>
           <View style={{paddingHorizontal: 10}}>
-            <Text style={{color: 'grey'}}>{item.description}</Text>
+            <Text style={{color: 'grey'}}>{item.Description}</Text>
           </View>
-
           <View
             style={{
               flexDirection: 'row',
@@ -108,7 +116,7 @@ const ItemViewShop = ({route}) => {
                 style={{width: 50, height: 50, borderRadius: 50}}
               />
               <View style={{marginLeft: 10}}>
-                <Text>Charles Benjamin</Text>
+                <Text style={{color: styles.textColor}}>Charles Benjamin</Text>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                   <Ionicons name="star" size={15} color={'#ffb100'} />
                   <Text style={{marginLeft: 5, color: 'grey'}}>4.9</Text>
@@ -131,8 +139,8 @@ const ItemViewShop = ({route}) => {
             justifyContent: 'space-between',
             padding: 10,
           }}>
-          <Text style={{fontSize: 19, color: 'black'}}>Price</Text>
-          <Text style={{fontSize: 18, color: 'grey'}}>{item.price}</Text>
+          <Text style={{fontSize: 19, color: styles.textColor}}>Price</Text>
+          <Text style={{fontSize: 18, color: 'grey'}}>{item.Price}</Text>
         </View>
         <View
           style={{
@@ -141,14 +149,15 @@ const ItemViewShop = ({route}) => {
             justifyContent: 'space-between',
             padding: 10,
           }}>
-          <Text style={{fontSize: 19, color: 'black'}}>Availability</Text>
-          <Text
-            style={{fontSize: 18, color: item.avaliablity ? 'green' : 'red'}}>
-            {item.avaliablity ? '• Avaliable' : '• Not in stock'}
+          <Text style={{fontSize: 19, color: styles.textColor}}>
+            Availability
+          </Text>
+          <Text style={{fontSize: 18, color: item.Avaliable ? 'green' : 'red'}}>
+            {item.Avaliable ? '• Avaliable' : '• Not in stock'}
           </Text>
         </View>
         <View style={{padding: 10}}>
-          <Text style={{fontSize: 18}}>More like this</Text>
+          <Text style={{fontSize: 18, color: 'grey'}}>More like this</Text>
           <View
             style={{
               flexDirection: 'row',
@@ -170,7 +179,12 @@ const ItemViewShop = ({route}) => {
                         style={{width: 160, height: 120, borderRadius: 10}}
                       />
                       <View style={{margin: 5}}>
-                        <Text style={{width: 130, fontSize: 16}}>
+                        <Text
+                          style={{
+                            width: 130,
+                            fontSize: 16,
+                            color: styles.textColor,
+                          }}>
                           {item.name}
                         </Text>
                         <Text style={{color: 'grey'}}>{item.price}</Text>

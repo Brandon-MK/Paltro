@@ -4,26 +4,26 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import BottomSheet from './bottomSheet';
 import Choices from './choices';
 import {useNavigation} from '@react-navigation/native';
-import {ThemeContext} from '../theme/themeManger';
+import {ThemeContext} from '../MainContext/MainContext';
 import LoadingImage from './loadingImage';
 import axios from 'axios';
+import {GetUserFeed} from '../Api/SocialApi';
 
 const SocialHeader = () => {
   const refRBSheet = useRef();
   const navigation = useNavigation();
-  const {styles, UserId} = React.useContext(ThemeContext);
+  const {styles} = React.useContext(ThemeContext);
   const [Loading, setLoading] = React.useState(true);
   const [data, setdata] = React.useState([]);
 
-  //const UserRetrieve = () => {
-  //   axios
-  //     .get(`http://192.168.0.101:5000/paltroServer/v1/accountFeed/${UserId}`)
-  //     .then(data => setdata(data.data))
-  //     .catch(err => console.log(err));
-  // };
-  // React.useEffect(() => {
-  //   UserRetrieve();
-  // }, []);
+  const UserRetrieve = async () => {
+    await GetUserFeed().then(res => {
+      setdata(res);
+    });
+  };
+  React.useEffect(() => {
+    UserRetrieve();
+  }, []);
   return (
     <View
       style={{
@@ -60,7 +60,7 @@ const SocialHeader = () => {
             fontFamily: 'Roboto-Medium',
             color: styles.textColor,
           }}>
-          Mick John🉐🇺🇬
+          {data.Name === undefined ? '' : data.Name}
         </Text>
       </View>
 
@@ -74,15 +74,15 @@ const SocialHeader = () => {
           justifyContent: 'center',
         }}
         onPress={() => {
-          navigation.navigate('ProfileSocial');
+          navigation.navigate('ProfileSocial', {UserData: data});
         }}>
         <View>
           <View style={{elevation: 5, marginRight: 5, borderRadius: 50}}>
             <Image
               source={
-                data.profileImage == undefined || data.profileImage === ''
+                data.ProfileImage == undefined || data.ProfileImage === ''
                   ? require('../images/user.png')
-                  : {uri: data.profileImage}
+                  : {uri: data.ProfileImage}
               }
               style={{
                 width: 40,
@@ -96,19 +96,15 @@ const SocialHeader = () => {
           </View>
           {Loading ? <LoadingImage type={'Image'} /> : null}
         </View>
-        <Text
-          style={{
-            fontFamily: 'Roboto-Medium',
-            color: styles.textColor,
-          }}>
-          {data.name}
-        </Text>
       </TouchableOpacity>
 
       <BottomSheet
         ref={refRBSheet}
         closeOnDragDown={true}
-        closeOnPressMask={true}>
+        closeOnPressMask={true}
+        customStyles={{
+          container: {backgroundColor: styles.Background},
+        }}>
         <Choices Social={true} />
       </BottomSheet>
     </View>

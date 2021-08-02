@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Image, FlatList, Text, Pressable} from 'react-native';
-import {ThemeContext} from '../theme/themeManger';
+import {ThemeContext} from '../MainContext/MainContext';
 import {useNavigation} from '@react-navigation/native';
 import LoadingImage from './loadingImage';
 import LinearGradient from 'react-native-linear-gradient';

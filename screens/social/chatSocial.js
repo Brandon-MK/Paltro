@@ -3,7 +3,7 @@ import {View, Text, FlatList} from 'react-native';
 import {Input} from 'native-base';
 import ChatView from '../../components/ChatView';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {ThemeProvider, ThemeContext} from '../../theme/themeManger';
+import {ThemeProvider, ThemeContext} from '../../MainContext/MainContext';
 
 const ChatSocial = () => {
   const data = [

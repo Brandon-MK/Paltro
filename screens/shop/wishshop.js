@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, Image, TouchableOpacity, ScrollView} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {ThemeProvider, ThemeContext} from '../../MainContext/MainContext';
 
 const WishShop = () => {
   const data = [
@@ -53,12 +54,13 @@ const WishShop = () => {
       ],
     },
   ];
+  const {styles} = React.useContext(ThemeContext);
   const navigation = useNavigation();
   return (
-    <View>
+    <View style={{flex: 1, backgroundColor: styles.Background}}>
       <ScrollView>
         <View style={{padding: 15}}>
-          <Text style={{fontSize: 25}}>Saved</Text>
+          <Text style={{fontSize: 25, color: styles.textColor}}>Saved</Text>
         </View>
         <View>
           {data.map(items => {
@@ -81,7 +83,12 @@ const WishShop = () => {
                       style={{width: 160, height: 120, borderRadius: 10}}
                     />
                     <View style={{marginLeft: 10}}>
-                      <Text style={{width: 130, fontSize: 16}}>
+                      <Text
+                        style={{
+                          width: 130,
+                          fontSize: 16,
+                          color: styles.textColor,
+                        }}>
                         {item.name}
                       </Text>
                       <Text style={{color: 'grey'}}>{item.price}</Text>

@@ -1,12 +1,23 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {View, ImageBackground, Text, Image} from 'react-native';
+import {
+  View,
+  ImageBackground,
+  Text,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import {ScrollView} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {ThemeContext} from '../../theme/themeManger';
+import BottomSheet from '../../components/bottomSheet';
+import Choices from '../../components/choices';
 
 const HomePodcast = () => {
   const navigation = useNavigation();
+  const refRBSheet = useRef();
+  const {styles, dark} = React.useContext(ThemeContext);
   const Banner = ({image, name, creator, category}) => {
     return (
       <ImageBackground
@@ -83,7 +94,7 @@ const HomePodcast = () => {
         />
         <View style={{marginHorizontal: 20}}>
           <View style={{maxWidth: 200}}>
-            <Text style={{fontSize: 15}}>
+            <Text style={{fontSize: 15, color: styles.textColor}}>
               {`${title} • Episode ${episode}`}
             </Text>
           </View>
@@ -93,7 +104,11 @@ const HomePodcast = () => {
               alignItems: 'center',
               marginTop: 5,
             }}>
-            <AntDesign name="clockcircleo" color={'grey'} size={16} />
+            <AntDesign
+              name="clockcircleo"
+              color={dark ? 'white' : 'grey'}
+              size={16}
+            />
             <Text
               style={{
                 color: 'grey',
@@ -116,7 +131,10 @@ const HomePodcast = () => {
           borderRadius={10}
         />
         <View style={{alignItems: 'center'}}>
-          <Text style={{width: 100, textAlign: 'center'}}>{title}</Text>
+          <Text
+            style={{width: 100, textAlign: 'center', color: styles.textColor}}>
+            {title}
+          </Text>
           <Text
             style={{
               fontSize: 12,
@@ -202,15 +220,37 @@ const HomePodcast = () => {
     },
   ];
   return (
-    <View>
+    <View style={{flex: 1, backgroundColor: styles.Background}}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={{padding: 15}}>
-          <Text style={{fontFamily: 'Roboto-Medium', fontSize: 20}}>
-            Hey Mike
-          </Text>
-          <Text style={{fontFamily: 'SourceCodePro-Light', fontSize: 13}}>
-            Listen to what fits you
-          </Text>
+        <View style={{padding: 15, flexDirection: 'row', alignItems: 'center'}}>
+          <TouchableOpacity onPress={() => refRBSheet.current.open()}>
+            <Image
+              source={require('../../images/icon.png')}
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: 50,
+              }}
+            />
+          </TouchableOpacity>
+          <View style={{marginLeft: 10}}>
+            <Text
+              style={{
+                fontFamily: 'Roboto-Medium',
+                fontSize: 20,
+                color: styles.textColor,
+              }}>
+              Hey Mike
+            </Text>
+            <Text
+              style={{
+                fontFamily: 'SourceCodePro-Light',
+                fontSize: 13,
+                color: styles.textColor,
+              }}>
+              Listen to what fits you
+            </Text>
+          </View>
         </View>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <View
@@ -233,7 +273,9 @@ const HomePodcast = () => {
           </View>
         </ScrollView>
         <View style={{padding: 10}}>
-          <Text style={{fontSize: 17}}>Recently played</Text>
+          <Text style={{fontSize: 17, color: styles.textColor}}>
+            Recently played
+          </Text>
           {recent.map(item => {
             return (
               <Played
@@ -248,7 +290,7 @@ const HomePodcast = () => {
         </View>
         <View style={{padding: 10}}>
           <View style={{padding: 10, paddingLeft: 0}}>
-            <Text style={{fontSize: 17}}>For You</Text>
+            <Text style={{fontSize: 17, color: styles.textColor}}>For You</Text>
           </View>
           <View
             style={{
@@ -267,6 +309,15 @@ const HomePodcast = () => {
             ))}
           </View>
         </View>
+        <BottomSheet
+          ref={refRBSheet}
+          closeOnDragDown={true}
+          closeOnPressMask={true}
+          customStyles={{
+            container: {backgroundColor: styles.Background},
+          }}>
+          <Choices Music={true} />
+        </BottomSheet>
       </ScrollView>
     </View>
   );

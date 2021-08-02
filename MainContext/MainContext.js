@@ -6,8 +6,8 @@ export const ThemeProvider = ({children}) => {
   const [dark, setDark] = React.useState(true);
   const [UserId, setUserId] = React.useState('');
 
-  const ToggleTheme = () => {
-    setDark();
+  const ToggleTheme = item => {
+    setDark(item);
   };
 
   const ChangeUserId = id => {
@@ -15,7 +15,7 @@ export const ThemeProvider = ({children}) => {
   };
 
   const styles = {
-    Background: dark ? 'black' : '#eaeaea',
+    Background: dark ? '#1E1818' : '#eaeaea',
     cardBackground: dark ? '#222222' : 'white',
     textColor: dark ? 'white' : 'black',
     IconColor: dark ? 'white' : 'black',

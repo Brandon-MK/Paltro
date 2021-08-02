@@ -2,7 +2,7 @@ import React, {useRef} from 'react';
 import {View, Text, Image, Alert, Animated} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
-import {ThemeContext} from '../theme/themeManger';
+import {ThemeContext} from '../MainContext/MainContext';
 
 const LoadingScreen = ({route}) => {
   const {email} = route.params;

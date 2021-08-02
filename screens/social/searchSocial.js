@@ -4,7 +4,7 @@ import {Input, Tabs} from 'native-base';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import TextCard from '../../components/TextCard';
 import {useNavigation} from '@react-navigation/native';
-import {ThemeProvider, ThemeContext} from '../../theme/themeManger';
+import {ThemeProvider, ThemeContext} from '../../MainContext/MainContext';
 
 const SearchSocial = () => {
   const Images = [

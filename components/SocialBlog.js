@@ -3,7 +3,7 @@ import {View, Text, Pressable} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {useNavigation} from '@react-navigation/native';
 import Feather from 'react-native-vector-icons/Feather';
-import {ThemeProvider, ThemeContext} from '../theme/themeManger';
+import {ThemeProvider, ThemeContext} from '../MainContext/MainContext';
 
 const SocialBlog = () => {
   const {styles} = React.useContext(ThemeContext);
@@ -29,7 +29,7 @@ const SocialBlog = () => {
             angle={90}
             useAngle={true}
             style={{borderRadius: 10, width: 90}}>
-            <Pressable onPress={() => navigation.navigate('JetScreen')}>
+            <Pressable onPress={() => navigation.navigate('StoryCreator')}>
               <View
                 style={{
                   flexDirection: 'row',

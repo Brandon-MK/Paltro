@@ -30,29 +30,24 @@ const Camera = () => {
     if (camera) {
       const options = {quality: 0.5, base64: true};
       const data = await camera.current.takePictureAsync(options);
-      let base64Img = data.uri;
-      console.log(base64Img);
-      //   RNFS.readFile(
-      //     Platform.OS === 'android' ? base64Img.substring(7) : base64Img,
-      //     'base64',
-      //   ) //substring(7) -> to remove the file://
-      //     .then(res => setUrsi(res))
-      //     .catch(err => console.error(err));
-
-      //   if (uri) {
-      //     axios
-      //       .post('http://192.168.0.101:5000/paltroServer/v1/', {
-      //         body: JSON.stringify({
-      //           image_encoded: `data:image/jpg;base64,${uri}`,
-      //         }),
-      //       })
-      //       .then(responseData => {
-      //         console.log(responseData);
-      //       })
-      //       .catch(err => {
-      //         console.log(err);
-      //       });
-      //   }
+      let formdata = new FormData();
+      const image = {uri: data.uri, name: 'image.jpg', type: 'image/jpeg'};
+      formdata.append('imagedata', image);
+      try {
+        const config = {
+          method: 'POST',
+          body: formdata,
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        };
+        return fetch(
+          'http://192.168.0.101:5000/paltroServer/v1/UploadFile',
+          config,
+        ).then(() => console.log('Done'));
+      } catch (err) {
+        console.error(err);
+      }
     }
   };
   const handleButtonPress = () => {

@@ -8,7 +8,7 @@ import GestureHandler, {
 } from 'react-native-gesture-handler';
 import BottomSheet from './bottomSheet';
 import {ScrollView} from 'react-native';
-import {ThemeContext} from '../theme/themeManger';
+import {ThemeContext} from '../MainContext/MainContext';
 import LoadingImage from './loadingImage';
 import FlatListSlider from './imageslider/slider';
 
@@ -17,6 +17,7 @@ const ImageCard = props => {
   const {styles} = React.useContext(ThemeContext);
   const [loading, setLoading] = useState(true);
   const [imageLoading, setImageLoading] = useState(true);
+  const [liked, setLiked] = useState(false);
   const TimeStamp = time => {
     const Months = {
       0: 'Jan',
@@ -44,7 +45,7 @@ const ImageCard = props => {
       <Text
         style={{
           fontSize: 10,
-          color: styles.timeStampColor,
+          color: 'grey',
         }}>{`${strTime} • ${time.getDate()} ${
         Months[time.getMonth()]
       } ${time.getFullYear()}`}</Text>
@@ -82,7 +83,6 @@ const ImageCard = props => {
                 <Text
                   style={{
                     fontSize: 10,
-                    color: 'grey',
                   }}>
                   {TimeStamp(item.timestamp)}
                 </Text>
@@ -172,7 +172,7 @@ const ImageCard = props => {
             height={250}
             indicatorContainerStyle={{position: 'absolute', bottom: 20}}
             //currentIndexCallback={index => console.log('Index', index)}
-            onPress={item => alert(JSON.stringify(item))}
+            //onPress={item => alert(JSON.stringify(item))}
             indicatorActiveColor={'black'}
             indicatorInActiveColor={'grey'}
             indicator
@@ -206,7 +206,12 @@ const ImageCard = props => {
             justifyContent: 'space-between',
           }}>
           <View>
-            <Ionicons name="heart-outline" size={32} color={styles.IconColor} />
+            <Ionicons
+              name="heart-outline"
+              size={32}
+              color={liked ? 'red' : styles.IconColor}
+              onPress={() => setLiked(!liked)}
+            />
           </View>
           <View>
             <Ionicons
@@ -257,12 +262,14 @@ const ImageCard = props => {
             style={{
               fontSize: 12,
               color: styles.textColor,
-            }}>{`95 likes • ${props.Comments.length} comments`}</Text>
+            }}>{`0 likes • ${props.Comments.length} comments`}</Text>
         </View>
-        <View
-          style={{marginHorizontal: 10, marginBottom: 5, marginVertical: 2}}>
-          <Text style={{color: styles.textColor}}>{props.Text}</Text>
-        </View>
+        {props.Text === undefined ? null : (
+          <View
+            style={{marginHorizontal: 10, marginBottom: 5, marginVertical: 2}}>
+            <Text style={{color: styles.textColor}}>{props.Text}</Text>
+          </View>
+        )}
         <View
           style={{
             paddingHorizontal: 10,

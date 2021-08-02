@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, TouchableOpacity, Image, Button} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {ThemeProvider, ThemeContext} from '../../MainContext/MainContext';
 
 const CartShop = () => {
   const data = [
@@ -28,11 +29,12 @@ const CartShop = () => {
       ],
     },
   ];
+  const {styles, dark} = React.useContext(ThemeContext);
   const navigation = useNavigation();
   return (
-    <View>
+    <View style={{flex: 1, backgroundColor: styles.Background}}>
       <View style={{padding: 15}}>
-        <Text style={{fontSize: 25}}>My Cart</Text>
+        <Text style={{fontSize: 25, color: styles.textColor}}>My Cart</Text>
       </View>
       <View>
         {data.map(items => {
@@ -55,7 +57,14 @@ const CartShop = () => {
                     style={{width: 160, height: 120, borderRadius: 10}}
                   />
                   <View style={{marginLeft: 10}}>
-                    <Text style={{width: 130, fontSize: 16}}>{item.name}</Text>
+                    <Text
+                      style={{
+                        width: 130,
+                        fontSize: 16,
+                        color: styles.textColor,
+                      }}>
+                      {item.name}
+                    </Text>
                     <Text style={{color: 'grey'}}>{item.price}</Text>
                     <Text style={{color: item.avaliablity ? 'green' : 'red'}}>
                       {item.avaliablity ? 'Avaliable' : 'Not in stock'}
@@ -75,15 +84,15 @@ const CartShop = () => {
                           style={{
                             backgroundColor: '#e5e5e5',
                             borderRadius: 50,
-                            width: 35,
+                            width: 25,
+                            height: 25,
                             alignItems: 'center',
                             justifyContent: 'center',
                             marginRight: 5,
                           }}>
                           <Text
                             style={{
-                              fontSize: 20,
-                              padding: 1,
+                              fontSize: 15,
                             }}>
                             +
                           </Text>
@@ -94,16 +103,13 @@ const CartShop = () => {
                           style={{
                             backgroundColor: '#e5e5e5',
                             borderRadius: 50,
-                            width: 35,
+                            width: 25,
+                            height: 25,
                             alignItems: 'center',
                             justifyContent: 'center',
                             marginLeft: 5,
                           }}>
-                          <Text
-                            style={{
-                              fontSize: 20,
-                              padding: 1,
-                            }}>
+                          <Text style={{textAlign: 'center', fontSize: 17}}>
                             -
                           </Text>
                         </View>
@@ -113,6 +119,7 @@ const CartShop = () => {
                           backgroundColor: '#e5e5e5',
                           borderRadius: 50,
                           width: 30,
+                          height: 30,
                           alignItems: 'center',
                           justifyContent: 'center',
                         }}>
@@ -127,14 +134,20 @@ const CartShop = () => {
         })}
       </View>
       <View
-        style={{padding: 10, backgroundColor: '#e5e5e5', marginVertical: 10}}>
+        style={{
+          padding: 10,
+          backgroundColor: dark ? '#222222' : '#e5e5e5',
+          marginVertical: 10,
+        }}>
         <View
           style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
             marginVertical: 10,
           }}>
-          <Text style={{fontSize: 15}}>Delivery Location</Text>
+          <Text style={{fontSize: 15, color: styles.textColor}}>
+            Delivery Location
+          </Text>
           <Text style={{fontSize: 15, color: 'grey'}}>Kampala, Uganda</Text>
         </View>
         <View
@@ -143,7 +156,9 @@ const CartShop = () => {
             justifyContent: 'space-between',
             marginVertical: 10,
           }}>
-          <Text style={{fontSize: 15}}>Payment Method</Text>
+          <Text style={{fontSize: 15, color: styles.textColor}}>
+            Payment Method
+          </Text>
           <Text style={{fontSize: 15, color: 'grey'}}>Cash on Delivery</Text>
         </View>
       </View>
@@ -154,8 +169,8 @@ const CartShop = () => {
             justifyContent: 'space-between',
             marginVertical: 10,
           }}>
-          <Text style={{fontSize: 18}}>Total</Text>
-          <Text style={{fontSize: 18, color: 'grey'}}>60,000 Ugx</Text>
+          <Text style={{fontSize: 18, color: styles.textColor}}>Total</Text>
+          <Text style={{fontSize: 18, color: 'green'}}>60,000 Ugx</Text>
         </View>
       </View>
       <View style={{padding: 10, marginTop: -20}}>

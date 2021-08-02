@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, FlatList} from 'react-native';
 import NotificationCard from '../../components/notificationCard';
 import {useNavigation} from '@react-navigation/native';
-import {ThemeProvider, ThemeContext} from '../../theme/themeManger';
+import {ThemeProvider, ThemeContext} from '../../MainContext/MainContext';
 
 const NotiSocial = () => {
   const Notifications = [

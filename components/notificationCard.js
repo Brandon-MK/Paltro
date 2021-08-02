@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Image, Text} from 'react-native';
-import {ThemeProvider, ThemeContext} from '../theme/themeManger';
+import {ThemeProvider, ThemeContext} from '../MainContext/MainContext';
 
 const NotificationCard = props => {
   const {styles} = React.useContext(ThemeContext);

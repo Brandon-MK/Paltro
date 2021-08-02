@@ -7,7 +7,7 @@ import {Button, CheckBox, Input} from 'react-native-elements';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import axios from 'axios';
-import {ThemeContext} from '../../theme/themeManger';
+import {ThemeContext} from '../../MainContext/MainContext';
 
 const width = Dimensions.get('window').width;
 

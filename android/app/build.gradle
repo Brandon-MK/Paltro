@@ -202,7 +202,7 @@ dependencies {
 
     implementation project(':lottie-react-native')
 
-    implementation 'com.android.support:multidex:2.0.1'
+    implementation 'com.android.support:multidex:2.0.0'
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'

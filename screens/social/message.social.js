@@ -2,7 +2,7 @@ import React, {useState, useRef, useEffect} from 'react';
 import {View, FlatList, Text, TextInput, Keyboard, Image} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
-import {ThemeProvider, ThemeContext} from '../../theme/themeManger';
+import {ThemeProvider, ThemeContext} from '../../MainContext/MainContext';
 
 const MessageScreen = ({route, navigation}) => {
   const {name, profileImage} = route.params;

@@ -4,7 +4,7 @@ import {Text, Icon} from 'native-base';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 import {Button, SocialIcon, Input} from 'react-native-elements';
 import Auth from '@react-native-firebase/auth';
-import {ThemeContext} from '../../theme/themeManger';
+import {ThemeContext} from '../../MainContext/MainContext';
 
 export const login = ({navigation}) => {
   const [email, setemail] = useState('');

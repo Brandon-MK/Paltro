@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, Image, TouchableWithoutFeedback} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {ThemeProvider, ThemeContext} from '../theme/themeManger';
+import {ThemeProvider, ThemeContext} from '../MainContext/MainContext';
 
 const ChatView = props => {
   const navigation = useNavigation();
