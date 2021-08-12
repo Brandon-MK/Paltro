@@ -6876,10 +6876,10 @@ react-native-linear-gradient@^2.5.6:
   resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.5.6.tgz#96215cbc5ec7a01247a20890888aa75b834d44a0"
   integrity sha512-HDwEaXcQIuXXCV70O+bK1rizFong3wj+5Q/jSyifKFLg0VWF95xh8XQgfzXwtq0NggL9vNjPKXa016KuFu+VFg==
 
-react-native-pager-view@^5.2.1:
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/react-native-pager-view/-/react-native-pager-view-5.2.1.tgz#ad69a6035edd998771daf302830f73602e5204a9"
-  integrity sha512-6aqsVr6Z4MjYP57lMwNEurlOPah0Lw34L6x+/nI6SxY+wyqZI+uaEB7sWS5EIcgQ9cGKMo925LnVWd6Xilu33A==
+react-native-pager-view@^5.3.0:
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-pager-view/-/react-native-pager-view-5.4.0.tgz#8e30a391a68da26e59f4ae724341b9208924b2ee"
+  integrity sha512-pYy3I8p5s6cPaymT1GibuDRHmicY3JdHHZyTH+Fra1S0wupaJhoZy33f2prrMJqQfk9kaqwCsb3pVmj4GuJTjA==
 
 react-native-push-notification@^7.4.0:
   version "7.4.0"
